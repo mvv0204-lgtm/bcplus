@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07111c">
+<title>BC+ · Búsqueda de Conciertos Plus · v0.17</title>
+<style>
+:root{--bg:#07111c;--side:#050c14;--panel:#0d1b29;--panel2:#102334;--line:#29445c;--txt:#f4f7fb;--mut:#9db0c2;--red:#ff5f63;--green:#30d77a;--blue:#80aaff;--gold:#d5ac49}
+*{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 76% 0,#0c263a 0,#07111c 44%);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;min-height:100vh}
+a{color:inherit}input,select,button,textarea{font:inherit}.shell{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;background:linear-gradient(180deg,#050c14,#07111b);border-right:1px solid #1c3042;padding:17px 13px;display:flex;flex-direction:column;z-index:40}.brand{display:flex;gap:10px;align-items:center;padding:3px 7px 18px}.brandmark{width:50px;height:50px;border-radius:14px;background:linear-gradient(145deg,#ff6569,#c92f3e);display:grid;place-items:center;font-weight:950;font-size:23px;box-shadow:0 9px 25px rgba(255,75,82,.18)}.brandtext b{display:block;font-size:21px}.brandtext span{font-size:9px;text-transform:uppercase;letter-spacing:1.05px;color:#92a6b8}.nav{display:grid;gap:5px}.nav a{text-decoration:none;padding:11px 10px;border-radius:10px;color:#bed0de;font-weight:700;font-size:13px;display:flex;gap:9px;align-items:center}.nav a:hover{background:#0d1c29;color:#fff}.nav a:first-child{background:linear-gradient(90deg,rgba(255,82,88,.16),transparent);box-shadow:inset 3px 0 var(--red);color:#fff}.sidefoot{margin-top:auto;border-top:1px solid #1b3042;padding:13px 7px 0}.creator{display:flex;gap:9px;align-items:center}.creator img{width:42px;height:42px;border-radius:50%;border:1px solid var(--gold);object-fit:cover}.creator small{color:#8197aa;display:block;font-size:10px}.creator b{color:#e4cc87;font-size:12px}.meta{margin-bottom:11px;font-size:10.5px;color:#9eb2c4;line-height:1.5}.meta strong{color:#ff7a7e}.main{min-width:0;width:100%;max-width:1450px;margin:0 auto;padding:20px clamp(14px,3vw,38px) 48px}.topbar{display:flex;align-items:center;gap:12px;margin-bottom:16px}.topbar h1{margin:0;font-size:26px;letter-spacing:-.45px}.topbar h1 em{font-style:normal;color:var(--red)}.hamb{display:none;text-decoration:none;width:43px;height:43px;border:1px solid #355069;background:#0a1926;border-radius:11px;place-items:center;font-size:21px}.panel{background:linear-gradient(180deg,rgba(14,31,46,.97),rgba(10,24,37,.97));border:1px solid #294159;border-radius:16px;padding:18px;box-shadow:0 18px 50px rgba(0,0,0,.23);margin-top:14px}.panelTitle{font-size:13px;color:#ff767a;text-transform:uppercase;letter-spacing:.5px;font-weight:900;margin-bottom:15px}.recheckLoaded{display:none;border:1px solid #315d73;background:#0a2230;border-radius:11px;padding:11px 12px;margin:-4px 0 14px;color:#cfe8f2;font-size:12px;line-height:1.45}.recheckLoaded b{color:#fff}.recheckLoaded .mini{color:#9fc0cf;margin-top:4px}.formgrid{display:grid;grid-template-columns:minmax(250px,.8fr) minmax(330px,1.2fr);gap:14px}.field{min-width:0}.field.full{grid-column:1/-1}.field>label,.fieldTitle{display:block;font-size:13px;font-weight:850;margin-bottom:7px}.help{color:#8fa4b6;font-size:11.5px;line-height:1.35;margin-top:6px}.control{width:100%;min-height:45px;border:1px solid #3b566e;background:#122638;color:#fff;border-radius:10px;padding:10px 12px;outline:none}.control:focus{border-color:#7396b6;box-shadow:0 0 0 3px rgba(115,150,182,.14)}select.control{padding:0 12px}.modes{display:flex;gap:8px;flex-wrap:wrap}.modeRadio{position:absolute;opacity:0;pointer-events:none}.modeLabel{display:inline-flex;align-items:center;gap:6px;border:1px solid #3a546b;background:#102235;color:#c5d3df;border-radius:10px;padding:10px 12px;font-size:12px;font-weight:800;cursor:pointer}.modeRadio:checked+.modeLabel{border-color:#ff696e;background:#2d1d29;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,105,110,.18)}.reveal{display:none;margin-top:9px}#emailUse:checked~.emailReveal,#locCustom:checked~.locReveal,#artistWrite:checked~.artistReveal,#styleCustomMode:checked~.styleCustomReveal{display:block}.period{display:grid;grid-template-columns:1fr 1fr;gap:12px}.periodGroup{display:grid;grid-template-columns:1fr 1fr;gap:8px}.periodGroup small{grid-column:1/-1;color:#91a7b9;font-weight:800}.styleArea{border:1px solid #2d485f;border-radius:13px;padding:13px;background:#0a1824}.lockedStyle{display:none;border:1px solid #344d62;background:#0c1b28;color:#aabac8;border-radius:10px;padding:12px;font-weight:750}form:has(#artistWrite:checked) .styleChooser{display:none}form:has(#artistWrite:checked) .lockedStyle{display:block}.innerTools{border-top:1px dashed #3a5368;margin-top:11px;padding-top:11px}details.toolbox{margin-top:10px;border:1px solid #314b61;border-radius:10px;background:#0b1b29}details.toolbox summary{cursor:pointer;padding:11px 12px;font-weight:800;color:#c9d7e2;list-style:none}details.toolbox summary::-webkit-details-marker{display:none}details.toolbox[open] summary{border-bottom:1px solid #29445a}.toolbody{padding:12px}.stylegrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;max-height:210px;overflow:auto}.check{border:1px solid #29475e;background:#102437;border-radius:8px;padding:7px 8px;font-size:11px;color:#bfd0dc}.check input{accent-color:#e94f57}.actionbar{display:flex;justify-content:center;margin-top:19px}.btn{border:1px solid #3b5369;background:#0f2030;color:#fff;border-radius:10px;padding:11px 15px;font-weight:850;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px;cursor:pointer}.btn.primary{border:0;background:linear-gradient(90deg,#df424a,#ff666a);padding:13px 28px;box-shadow:0 8px 24px rgba(255,74,81,.18)}.reviewToggle{position:absolute;opacity:0;pointer-events:none}.reviewBox{display:none}.reviewToggle:checked~.actionbar{display:none}.reviewToggle:checked~.reviewBox{display:block}.review{margin-top:15px;border:1px solid #35536b;border-radius:13px;background:#0a1925}.reviewBody{padding:14px;border-top:1px solid #29445a}.reviewBody h3{margin:0 0 8px;color:#cfe0eb}.summaryMini{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:10px}.summaryMini div{border:1px solid #284156;background:#0e2030;border-radius:9px;padding:9px;font-size:11px;color:#9eb3c5}.summaryMini b{display:block;color:#fff;margin-top:4px}.view{display:none}#searchView{display:block}.view:target{display:block}main:has(.view:target) #searchView:not(:target){display:none}.screenTitle{display:flex;align-items:center;gap:8px;margin-bottom:8px}.screenTitle h2{margin:0;font-size:22px}.empty{border:1px dashed #3a5267;border-radius:12px;padding:26px;text-align:center;color:#9eb1c1}.item{border:1px solid #294159;background:#0b1a27;border-radius:11px;padding:12px;margin-top:9px}.prefBox{border:1px solid #294159;background:#0b1a27;border-radius:11px;padding:13px;margin-top:10px}.guide{line-height:1.6;color:#bed0dc}.about{display:grid;grid-template-columns:1.2fr .8fr;gap:13px}.creatorLarge{text-align:center}.creatorLarge img{width:120px;height:120px;border-radius:50%;border:1px solid var(--gold);object-fit:cover}.shade{display:none}@media(max-width:980px){.shell{display:block}.sidebar{position:fixed;left:-260px;top:0;width:245px;height:100vh;transition:left .18s ease;box-shadow:20px 0 60px rgba(0,0,0,.35)}#menu:target{left:0}body:has(#menu:target) .shade{display:block;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:30}.hamb{display:grid}.main{padding-top:14px}}@media(max-width:720px){.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.period{grid-template-columns:1fr}.periodGroup{grid-template-columns:1fr 1fr}.stylegrid{grid-template-columns:1fr 1fr}.summaryMini{grid-template-columns:1fr}.topbar h1{font-size:21px}.about{grid-template-columns:1fr}}@media(max-width:420px){.periodGroup{grid-template-columns:1fr}.modes{gap:6px}.modeLabel{width:100%;justify-content:flex-start}}
+
+
+
+.transferGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.transferCard{border:1px solid #294159;background:#0b1a27;border-radius:12px;padding:14px}.transferCard h3{margin:0 0 7px;font-size:15px}.filePick{display:block;margin-top:12px}.filePick input{width:100%;border:1px solid #3b566e;background:#122638;color:#dbe7ef;border-radius:10px;padding:10px}.inlineActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.localNote{display:inline-flex;gap:6px;align-items:center;border:1px solid #31506a;background:#0b1d2b;border-radius:999px;padding:6px 9px;font-size:10.5px;color:#a9c0d1;margin-top:8px}@media(max-width:720px){.transferGrid{grid-template-columns:1fr}}
+.invalid{border-color:#ff6b70!important;box-shadow:0 0 0 3px rgba(255,95,99,.16)!important}.errorNote{display:none;color:#ff8e92;font-size:11px;margin-top:5px;font-weight:700}
+
+.resultImport{margin-top:14px;border:1px solid #3b5a73;border-radius:13px;background:#0b1b29;padding:14px}
+.resultImport h3{margin:0 0 7px}.resultFile{margin-top:10px;width:100%;border:1px solid #3b566e;background:#122638;color:#dbe7ef;border-radius:10px;padding:10px}
+.resultBox{margin-top:15px;border:1px solid #37644d;border-radius:13px;background:linear-gradient(180deg,#0b221a,#0a1a18);display:none}
+.resultBody{padding:14px}.resultSummary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 12px}.resultSummary>div{border:1px solid #31584a;background:#10251f;border-radius:9px;padding:9px;font-size:11px;color:#a9c8b9}.resultSummary b{display:block;color:#fff;margin-top:4px}.resultText{white-space:pre-wrap;border:1px solid #294b40;background:#081712;border-radius:10px;padding:12px;max-height:320px;overflow:auto;color:#d9e8e0;font-size:12px;line-height:1.45}.saveRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.entityList{display:grid;gap:8px;margin-top:10px}.entitySave{border:1px solid #2e5145;background:#0d211b;border-radius:10px;padding:10px;display:flex;align-items:center;justify-content:space-between;gap:10px}.entitySave .desc{font-size:12px;color:#c9ded3}.entitySave .desc b{color:#fff}.tinyBtn{border:1px solid #466958;background:#132b23;color:#fff;border-radius:8px;padding:8px 10px;font-weight:800;cursor:pointer;white-space:nowrap}.tinyBtn.saved{opacity:.55;cursor:default}.conversionBox{margin-top:14px;border:1px solid #8a6a20;background:#2a210b;border-radius:11px;padding:10px}.conversionBox h4{margin:0 0 8px;color:#ffe39b}.conversionItem{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid #5c4919;padding:9px 0}.conversionItem:first-of-type{border-top:0}.conversionItem .desc{font-size:12px;line-height:1.4;color:#eadfbf}.conversionItem .desc b{color:#fff}@media(max-width:720px){.conversionItem{align-items:flex-start;flex-direction:column}.conversionItem .tinyBtn{width:100%}}.storedCard{border:1px solid #294159;background:#0b1a27;border-radius:11px;padding:12px;margin-top:9px}.storedCard b{display:block;margin-bottom:5px}.storedMeta{color:#9eb1c1;font-size:11px;line-height:1.45}.storedActions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.danger{border-color:#744149!important;color:#ffb0b3!important}.statusGood{display:none;margin-top:10px;border:1px solid #2f6a4a;background:#0d2a1c;color:#aee8c3;border-radius:9px;padding:9px;font-size:11px;font-weight:800}
+@media(max-width:720px){.resultSummary{grid-template-columns:1fr}.entitySave{align-items:flex-start;flex-direction:column}.tinyBtn{width:100%}}
+
+
+.otherYear{display:none;margin-top:8px}.amplitudeBox{margin-top:15px;border:1px solid #8a6732;border-radius:13px;background:linear-gradient(180deg,#2b2010,#18140d)}.amplitudeBody{padding:14px}.amplitudeBody h3{margin:0 0 8px;color:#ffd27a}.amplitudeActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.amplitudeReason{white-space:pre-wrap;border:1px solid #6f552c;background:#161109;border-radius:10px;padding:11px;color:#ead5aa;font-size:12px;line-height:1.45}
+.importPreview{display:none;margin-top:12px;border:1px solid #42617a;background:#0d2231;border-radius:11px;padding:12px}.importPreview h4{margin:0 0 7px;color:#fff}.importRef{font-size:14px;font-weight:900;color:#ffd27a;margin:4px 0 9px}.importMeta{font-size:11.5px;color:#b9cbd8;line-height:1.55}.importActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.importOk{border-color:#397554!important;background:#153326!important}.importWarn{color:#9db4c4;font-size:10.5px;margin-top:7px}.storedDetails{display:none;margin-top:8px;border-top:1px dashed #365066;padding-top:8px}.storedCard.showDetails .storedDetails{display:block}
+
+.consolidateTop{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}.resultPickList{display:grid;gap:8px;margin-top:12px}.resultPick{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;border:1px solid #294159;background:#0b1a27;border-radius:11px;padding:11px}.resultPick input{width:18px;height:18px;accent-color:#ff6267}.resultPick b{display:block;font-size:13px}.resultPick small{display:block;color:#91a7b9;margin-top:3px}.resultBadge{border:1px solid #31506a;background:#0d2232;border-radius:999px;padding:5px 8px;font-size:10.5px;color:#b8cad7;white-space:nowrap}.consolidatedBox{display:none;margin-top:16px;border:1px solid #3d654e;background:#0a1b14;border-radius:13px;padding:14px}.conStats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}.conStats div{border:1px solid #31584a;background:#10251f;border-radius:9px;padding:9px;font-size:11px;color:#9fbfae}.conStats b{display:block;color:#fff;font-size:16px;margin-top:3px}.conTableWrap{overflow:auto;max-height:420px;border:1px solid #294b40;border-radius:10px}.conTable{border-collapse:collapse;min-width:900px;width:100%;font-size:11px}.conTable th{position:sticky;top:0;background:#152d24;color:#e8f5ee;padding:8px;border-bottom:1px solid #3b5e4c;text-align:left}.conTable td{padding:7px;border-bottom:1px solid #203d31;vertical-align:top}.conTable tr:nth-child(even){background:#0d211a}.stepGuide{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.stepGuide div{border:1px solid #2d485f;background:#0b1a27;border-radius:10px;padding:10px;font-size:11px;color:#abc0cf}.stepGuide b{display:block;color:#fff;margin-bottom:4px}.tinyCheck{display:inline-flex;align-items:center;gap:6px;color:#b9cbd7;font-size:11px;font-weight:700}.tinyCheck input{accent-color:#ff6267}@media(max-width:720px){.conStats,.stepGuide{grid-template-columns:1fr 1fr}.resultPick{grid-template-columns:auto 1fr}.resultBadge{grid-column:2}}@media(max-width:430px){.conStats,.stepGuide{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<a class="shade" href="#searchView" aria-label="Cerrar menú"></a>
+<div class="shell">
+<aside class="sidebar" id="menu">
+  <div class="brand"><div class="brandmark">BC+</div><div class="brandtext"><b>BC+</b><span>Búsqueda de Conciertos Plus</span></div></div>
+  <nav class="nav">
+    <a href="#searchView" id="newSearchLink">🆕 Nueva búsqueda</a>
+    <a href="#savedView">📂 Mis búsquedas</a>
+    <a href="#transferView">📥 Importar / archivos</a>
+    <a href="#resultsView">📚 Consolidar resultados</a>
+    <a href="#alertsView">⚠️ Alertas guardadas</a>
+    <a href="#concertsView">⭐ Conciertos guardados</a>
+    <a href="#prefsView">⚙️ Preferencias</a>
+    <a href="#guideView">❓ Guía rápida</a>
+    <a href="#aboutView">ℹ️ Sobre BC+</a>
+  </nav>
+  <div class="sidefoot"><div class="meta"><strong>BC+ app · interfaz v0.20</strong><br>Prompt activo: BC+ v1.0<br>✅ HOMOLOGADO</div><div class="creator"><img src="data:image/jpeg;base64,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" alt="MVV"><div><small>Firma del creador</small><b>Creado con MVV</b></div></div></div>
+</aside>
+<main class="main">
+  <header class="topbar"><a class="hamb" href="#menu" aria-label="Abrir menú">☰</a><h1>BC<em>+</em> · Búsqueda de Conciertos Plus</h1></header>
+
+  <section class="view" id="searchView">
+    <section class="panel">
+      <div class="panelTitle">Define tu búsqueda</div>
+      <div class="recheckLoaded" id="recheckLoaded"><b>🔎 Criterios cargados para comprobar de nuevo</b><div class="mini" id="recheckLoadedMeta"></div></div>
+      <form id="bcForm" class="formgrid" autocomplete="off">
+        <div class="field">
+          <span class="fieldTitle">📧 Correo</span>
+          <div class="modes">
+            <input class="modeRadio" type="radio" name="emailMode" id="emailNone" checked>
+            <label class="modeLabel" for="emailNone">🚫 Sin correo</label>
+            <input class="modeRadio" type="radio" name="emailMode" id="emailUse">
+            <label class="modeLabel" for="emailUse">📧 Enviar por correo</label>
+            <div class="reveal emailReveal" style="width:100%">
+              <select class="control" id="emailChoice" aria-label="Correo para recibir el resultado">
+                <option value="CUSTOM">➕ Escribir otro correo…</option>
+              </select>
+              <div id="emailCustomWrap" style="display:none;margin-top:9px"><input class="control" id="emailValue" type="email" inputmode="email" placeholder="Escribe otro correo"></div>
+            </div>
+          </div>
+          <div class="help">Puedes buscar siempre sin correo. Si eliges «Enviar por correo», BC+ te ofrece los correos recordados y selecciona el ⭐ predeterminado.</div>
+        </div>
+        <div class="field">
+          <span class="fieldTitle">📍 Ubicación</span>
+          <div class="modes">
+            <input class="modeRadio" type="radio" name="locationMode" id="locNone" checked><label class="modeLabel" for="locNone">🌍 Sin especificar</label>
+            <input class="modeRadio" type="radio" name="locationMode" id="locGlobal"><label class="modeLabel" for="locGlobal">🌐 GLOBAL</label>
+            <input class="modeRadio" type="radio" name="locationMode" id="locCustom"><label class="modeLabel" for="locCustom">✏️ Especificar</label>
+            <div class="reveal locReveal"><input class="control" id="locationValue" placeholder="Escribe ciudad, país o ciudad + país"></div>
+          </div>
+          <div class="help">Sin artista y sin ubicación: Madrid/España. Con artista y sin ubicación: GLOBAL.</div>
+        </div>
+        <div class="field full">
+          <span class="fieldTitle">📅 Periodo</span>
+          <div class="period">
+            <div class="periodGroup"><small>Desde</small>
+              <select class="control" id="fromMonth"><option value="">— Mes —</option><option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option><option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option><option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option></select>
+              <select class="control" id="fromYear"><option value="">— Año —</option><option>1970</option><option>1971</option><option>1972</option><option>1973</option><option>1974</option><option>1975</option><option>1976</option><option>1977</option><option>1978</option><option>1979</option><option>1980</option><option>1981</option><option>1982</option><option>1983</option><option>1984</option><option>1985</option><option>1986</option><option>1987</option><option>1988</option><option>1989</option><option>1990</option><option>1991</option><option>1992</option><option>1993</option><option>1994</option><option>1995</option><option>1996</option><option>1997</option><option>1998</option><option>1999</option><option>2000</option><option>2001</option><option>2002</option><option>2003</option><option>2004</option><option>2005</option><option>2006</option><option>2007</option><option>2008</option><option>2009</option><option>2010</option><option>2011</option><option>2012</option><option>2013</option><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option><option>2024</option><option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option><option>2031</option><option>2032</option><option>2033</option><option>2034</option><option>2035</option><option>2036</option><option>2037</option><option>2038</option><option>2039</option><option>2040</option><option>2041</option><option>2042</option><option>2043</option><option>2044</option><option>2045</option><option>2046</option><option>2047</option><option>2048</option><option>2049</option><option>2050</option><option>2051</option><option>2052</option><option>2053</option><option>2054</option><option>2055</option><option>2056</option><option>2057</option><option>2058</option><option>2059</option><option>2060</option><option>2061</option><option>2062</option><option>2063</option><option>2064</option><option>2065</option><option>2066</option><option>2067</option><option>2068</option><option>2069</option><option>2070</option><option value="OTHER">✏️ Otro año…</option></select><input class="control otherYear" id="fromYearOther" inputmode="numeric" pattern="[0-9]*" placeholder="Escribe otro año">
+            </div>
+            <div class="periodGroup"><small>Hasta</small>
+              <select class="control" id="toMonth"><option value="">— Mes —</option><option>Enero</option><option>Febrero</option><option>Marzo</option><option>Abril</option><option>Mayo</option><option>Junio</option><option>Julio</option><option>Agosto</option><option>Septiembre</option><option>Octubre</option><option>Noviembre</option><option>Diciembre</option></select>
+              <select class="control" id="toYear"><option value="">— Año —</option><option>1970</option><option>1971</option><option>1972</option><option>1973</option><option>1974</option><option>1975</option><option>1976</option><option>1977</option><option>1978</option><option>1979</option><option>1980</option><option>1981</option><option>1982</option><option>1983</option><option>1984</option><option>1985</option><option>1986</option><option>1987</option><option>1988</option><option>1989</option><option>1990</option><option>1991</option><option>1992</option><option>1993</option><option>1994</option><option>1995</option><option>1996</option><option>1997</option><option>1998</option><option>1999</option><option>2000</option><option>2001</option><option>2002</option><option>2003</option><option>2004</option><option>2005</option><option>2006</option><option>2007</option><option>2008</option><option>2009</option><option>2010</option><option>2011</option><option>2012</option><option>2013</option><option>2014</option><option>2015</option><option>2016</option><option>2017</option><option>2018</option><option>2019</option><option>2020</option><option>2021</option><option>2022</option><option>2023</option><option>2024</option><option>2025</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option><option>2031</option><option>2032</option><option>2033</option><option>2034</option><option>2035</option><option>2036</option><option>2037</option><option>2038</option><option>2039</option><option>2040</option><option>2041</option><option>2042</option><option>2043</option><option>2044</option><option>2045</option><option>2046</option><option>2047</option><option>2048</option><option>2049</option><option>2050</option><option>2051</option><option>2052</option><option>2053</option><option>2054</option><option>2055</option><option>2056</option><option>2057</option><option>2058</option><option>2059</option><option>2060</option><option>2061</option><option>2062</option><option>2063</option><option>2064</option><option>2065</option><option>2066</option><option>2067</option><option>2068</option><option>2069</option><option>2070</option><option value="OTHER">✏️ Otro año…</option></select><input class="control otherYear" id="toYearOther" inputmode="numeric" pattern="[0-9]*" placeholder="Escribe otro año">
+            </div>
+          </div>
+          <div class="help">Obligatorio. Abre Mes y Año y selecciona ambos; no se introducen días.</div>
+        </div>
+        <div class="field full">
+          <span class="fieldTitle">🎤 Grupo / Artista</span>
+          <div class="modes">
+            <input class="modeRadio" type="radio" name="artistMode" id="artistNone" checked><label class="modeLabel" for="artistNone">🚫 Sin artista</label>
+            <input class="modeRadio" type="radio" name="artistMode" id="artistWrite"><label class="modeLabel" for="artistWrite">✏️ Especificar artista(s)</label>
+            <div class="reveal artistReveal"><input class="control" id="artistValue" placeholder="Escribe uno o varios artistas separados por comas"></div>
+          </div>
+          <div class="help">Puedes indicar uno o varios. Separa varios con comas.</div>
+        </div>
+        <div class="field full">
+          <span class="fieldTitle">🎵 Estilo</span>
+          <div class="lockedStyle">🔒 No procede · al especificar artista(s), BC+ los busca directamente.</div>
+          <div class="styleChooser styleArea">
+            <div class="modes">
+              <input class="modeRadio" type="radio" name="styleMode" id="styleBase" checked><label class="modeLabel" for="styleBase">🎧 Preferencias musicales BC+</label>
+              <input class="modeRadio" type="radio" name="styleMode" id="styleCustomMode"><label class="modeLabel" for="styleCustomMode">🎯 Elegir estilos desde 0</label>
+              <div class="reveal styleCustomReveal innerTools">
+                <div class="help" style="margin-top:0">Marca los estilos que quieras. Si prefieres, también puedes escribirlos directamente abajo separados por comas. Ambas formas se suman.</div>
+                <div class="stylegrid" style="margin-top:10px"><label class="check"><input type="checkbox"> Rock</label><label class="check"><input type="checkbox"> Rock and roll</label><label class="check"><input type="checkbox"> Hard rock</label><label class="check"><input type="checkbox"> Alternative rock</label><label class="check"><input type="checkbox"> Indie rock</label><label class="check"><input type="checkbox"> Classic rock</label><label class="check"><input type="checkbox"> Garage rock</label><label class="check"><input type="checkbox"> Blues-rock</label><label class="check"><input type="checkbox"> Progressive rock</label><label class="check"><input type="checkbox"> Psychedelic rock</label><label class="check"><input type="checkbox"> Glam rock</label><label class="check"><input type="checkbox"> Punk</label><label class="check"><input type="checkbox"> Pop punk</label><label class="check"><input type="checkbox"> Post-punk</label><label class="check"><input type="checkbox"> Emo</label><label class="check"><input type="checkbox"> Metal</label><label class="check"><input type="checkbox"> Heavy metal</label><label class="check"><input type="checkbox"> Power metal</label><label class="check"><input type="checkbox"> Thrash metal</label><label class="check"><input type="checkbox"> Metal melódico</label><label class="check"><input type="checkbox"> Metalcore</label><label class="check"><input type="checkbox"> Nu metal</label><label class="check"><input type="checkbox"> Death metal</label><label class="check"><input type="checkbox"> Black metal</label><label class="check"><input type="checkbox"> Doom metal</label><label class="check"><input type="checkbox"> Symphonic metal</label><label class="check"><input type="checkbox"> Folk metal</label><label class="check"><input type="checkbox"> Industrial metal</label><label class="check"><input type="checkbox"> Indie</label><label class="check"><input type="checkbox"> Alternativa</label><label class="check"><input type="checkbox"> Pop</label><label class="check"><input type="checkbox"> Pop-rock</label><label class="check"><input type="checkbox"> New wave</label><label class="check"><input type="checkbox"> Synth-pop</label><label class="check"><input type="checkbox"> Electrónica</label><label class="check"><input type="checkbox"> Dance</label><label class="check"><input type="checkbox"> House</label><label class="check"><input type="checkbox"> Techno</label><label class="check"><input type="checkbox"> EDM</label><label class="check"><input type="checkbox"> Trance</label><label class="check"><input type="checkbox"> Drum &amp; bass</label><label class="check"><input type="checkbox"> Dubstep</label><label class="check"><input type="checkbox"> Ambient</label><label class="check"><input type="checkbox"> Trip-hop</label><label class="check"><input type="checkbox"> Synthwave</label><label class="check"><input type="checkbox"> Industrial</label><label class="check"><input type="checkbox"> Darkwave</label><label class="check"><input type="checkbox"> EBM</label><label class="check"><input type="checkbox"> Gótico</label><label class="check"><input type="checkbox"> Blues</label><label class="check"><input type="checkbox"> Soul</label><label class="check"><input type="checkbox"> R&amp;B</label><label class="check"><input type="checkbox"> Funk</label><label class="check"><input type="checkbox"> Disco</label><label class="check"><input type="checkbox"> Jazz</label><label class="check"><input type="checkbox"> Gospel</label><label class="check"><input type="checkbox"> Reggae</label><label class="check"><input type="checkbox"> Ska</label><label class="check"><input type="checkbox"> Flamenco</label><label class="check"><input type="checkbox"> Rumba</label><label class="check"><input type="checkbox"> Rap</label><label class="check"><input type="checkbox"> Hip-hop</label><label class="check"><input type="checkbox"> Trap</label><label class="check"><input type="checkbox"> Reguetón</label><label class="check"><input type="checkbox"> Música latina</label><label class="check"><input type="checkbox"> Latin rock</label><label class="check"><input type="checkbox"> Salsa</label><label class="check"><input type="checkbox"> Bachata</label><label class="check"><input type="checkbox"> Merengue</label><label class="check"><input type="checkbox"> Cumbia</label><label class="check"><input type="checkbox"> Tango</label><label class="check"><input type="checkbox"> Bossa nova</label><label class="check"><input type="checkbox"> Afrobeats</label><label class="check"><input type="checkbox"> K-pop</label><label class="check"><input type="checkbox"> J-pop</label><label class="check"><input type="checkbox"> Country</label><label class="check"><input type="checkbox"> Folk</label><label class="check"><input type="checkbox"> Cantautor</label><label class="check"><input type="checkbox"> World music</label><label class="check"><input type="checkbox"> Clásica</label><label class="check"><input type="checkbox"> Ópera</label><label class="check"><input type="checkbox"> Musicales</label><label class="check"><input type="checkbox"> Bandas sonoras</label></div>
+                <label class="fieldTitle" for="styleCustomOther" style="margin-top:12px">✏️ Otros estilos / escribir directamente</label>
+                <input class="control" id="styleCustomOther" placeholder="Ej.: Rumba, city pop, folk metal · separados por comas">
+                <div class="help">Los estilos elegidos se interpretan como alternativas (O), no como una combinación obligatoria.</div>
+              </div>
+            </div>
+            <details class="toolbox"><summary>👁️ Ver preferencias musicales BC+</summary><div class="toolbody guide">Rock, hard rock, heavy metal, power metal, thrash, metal melódico, punk, post-punk, indie, alternativa, pop, pop-rock, new wave, synth-pop, electrónica melódica, darkwave, EBM cuando exista afinidad, progresivo, blues-rock, classic rock y excepciones sinfónicas/clásicas/bandas sonoras. Estas preferencias se usan únicamente cuando está seleccionada la opción <b>🎧 Preferencias musicales BC+</b>.</div></details>
+          </div>
+        </div>
+      </form>
+      <div class="actionbar" id="searchActionbar"><button class="btn primary" type="button" id="reviewBtn">🔍 Buscar conciertos</button></div>
+<div class="review" id="reviewBox" style="display:none"><div class="reviewBody"><h3>✅ Configuración BC+</h3><div class="help">Revisa los cinco criterios. Corregir vuelve al formulario sin borrar lo escrito.</div><div class="summaryMini"><div>📧 Correo<b id="sumEmail">—</b></div><div>📍 Ubicación<b id="sumLocation">—</b></div><div>📅 Periodo<b id="sumPeriod">—</b></div><div>🎤 Artista<b id="sumArtist">—</b></div><div>🎵 Estilo<b id="sumStyle">—</b></div></div><div style="display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:12px"><button class="btn" type="button" id="correctBtn">← Corregir</button><button class="btn primary" type="button" id="executeBtn">🚀 Ejecutar búsqueda</button></div></div></div>
+<div class="review" id="executionBox" style="display:none"><div class="reviewBody"><h3>🔬 Búsqueda BC+ preparada</h3><div class="help">Copia la solicitud y ejecútala en ChatGPT. Si BC+ considera la búsqueda demasiado amplia, ChatGPT devolverá un archivo <b>.bcpluscontrol</b>; impórtalo aquí y decidirás en la propia interfaz si mantenerla completa o ajustar. Si se ejecuta, vuelve con el archivo <b>.bcplusresult</b>.</div><textarea class="control" id="handoffText" rows="8" readonly style="margin-top:12px;min-height:150px"></textarea><div class="inlineActions"><button class="btn primary" type="button" id="copyHandoff">📋 Copiar solicitud BC+</button><button class="btn" type="button" id="exportCurrent">📤 Exportar .bcplus</button><button class="btn" type="button" id="backFromExecution">← Volver</button></div><div class="localNote" id="copyStatus" style="display:none">✅ Copiado</div><div class="resultImport"><h3>📥 Volver con el resultado</h3><div class="help">Selecciona el archivo devuelto por ChatGPT. <b>BC+ no lo absorberá todavía</b>: primero te mostrará qué búsqueda vas a importar y tendrás que confirmarla.</div><input class="resultFile" id="resultFile" type="file" accept=".bcplusresult,.bcpluscontrol,application/json"><div class="importPreview" id="bridgePreview"><h4>📦 Archivo preparado</h4><div class="importRef" id="bridgeReference">—</div><div class="importMeta" id="bridgeMeta">—</div><div class="importActions"><button class="btn importOk" type="button" id="confirmBridgeImport">✅ Importar ahora</button><button class="btn" type="button" id="cancelBridgeImport">Cancelar</button></div><div class="importWarn">Hasta pulsar “Importar ahora”, la búsqueda que tengas en pantalla no se modifica.</div></div><div class="localNote">🔒 Importación local · no crea historial automático</div></div></div></div>
+<div class="amplitudeBox" id="amplitudeBox" style="display:none"><div class="amplitudeBody"><h3>⚠️ BÚSQUEDA MUY AMPLIA</h3><div class="help">BC+ ha determinado que esta configuración puede producir una cantidad muy elevada de resultados. La aplicación no cambia ningún criterio por su cuenta.</div><div class="amplitudeReason" id="amplitudeReason">Esta configuración puede producir una cantidad muy elevada de resultados.</div><div class="amplitudeActions"><button class="btn primary" type="button" id="keepFullBtn">🚀 Mantener búsqueda completa</button><button class="btn" type="button" id="adjustSearchBtn">← Ajustar búsqueda</button></div></div></div>
+<div class="resultBox" id="resultBox"><div class="resultBody"><h3 style="margin:0">✅ Resultado BC+ recibido</h3><div class="resultSummary"><div>🔎 Estado<b id="resState">Completado</b></div><div>✅ Confirmados<b id="resConfirmed">0</b></div><div>⚠️ Pendientes<b id="resPending">0</b></div></div><div class="resultText" id="resultText"></div><div class="saveRow"><button class="btn primary" type="button" id="saveSearchBtn">💾 Guardar búsqueda</button><button class="btn" type="button" id="closeResultBtn">← Volver a configuración</button></div><div class="statusGood" id="saveSearchStatus">✅ Búsqueda guardada en este dispositivo.</div><div id="alertConversionArea"></div><div id="confirmedSaveArea"></div><div id="pendingSaveArea"></div></div></div>
+    </section>
+  </section>
+
+  <section class="view" id="savedView"><section class="panel"><div class="screenTitle"><span>📂</span><h2>Mis búsquedas</h2></div><p class="help">Solo configuraciones que guardes manualmente en esta copia de BC+. Nunca incluyen los resultados completos ni crean historial automático.</p><div id="savedList"><div class="empty">Todavía no hay búsquedas guardadas en este dispositivo.</div></div></section></section>
+  <section class="view" id="transferView"><section class="panel"><div class="screenTitle"><span>📥</span><h2>Importar / Exportar búsqueda</h2></div><p class="help">BC+ sigue siendo autónoma: no hay cuentas ni sincronización. Puedes conservar localmente varios archivos que hayas importado expresamente.</p><div class="transferGrid"><div class="transferCard"><h3>📥 Importar</h3><div class="help">Puedes seleccionar una <b>búsqueda (.bcplus)</b>, un <b>resultado (.bcplusresult)</b> o un <b>control de amplitud (.bcpluscontrol)</b>. Primero verás una referencia clara y <b>nada se absorberá ni guardará hasta que pulses OK</b>. Al confirmar, el archivo se conserva también en “📦 Archivos importados”.</div><label class="filePick"><input id="searchImportFile" type="file" accept=".bcplus,.bcplusresult,.bcpluscontrol,application/json" aria-label="Seleccionar archivo BC+ para importar"></label><div class="importPreview" id="searchImportPreview"><h4 id="searchImportTitle">📦 Archivo preparado</h4><div class="importRef" id="searchImportReference">—</div><div class="importMeta" id="searchImportMeta">—</div><div class="importActions"><button class="btn importOk" type="button" id="confirmSearchImport">✅ Importar ahora</button><button class="btn" type="button" id="cancelSearchImport">Cancelar</button></div><div class="importWarn" id="searchImportWarning">Hasta pulsar “Importar ahora”, la búsqueda que tengas en pantalla no se modifica.</div></div><div class="localNote">🔒 Importación manual · sin servidor</div></div><div class="transferCard"><h3>📤 Exportar búsqueda</h3><div class="help">La exportación aparecerá junto a cada búsqueda guardada. Generará un pequeño archivo <b>.bcplus</b> con sus 5 criterios, no con los resultados.</div><div class="inlineActions"><span class="btn" aria-disabled="true">📤 Exportar desde Mis búsquedas</span></div><div class="localNote">📎 El correo de resultados podrá adjuntar también este archivo</div></div></div><div class="prefBox" style="margin-top:14px"><b>📦 Archivos importados</b><div class="help">Aquí quedan únicamente los archivos cuya importación has confirmado. Puedes importar Duncan Dhu, Depeche Mode, una búsqueda antigua, etc. y mantenerlos todos. No es historial automático. Los resultados guardados aquí aparecen también en <b>📚 Consolidar resultados</b>.</div><div id="importsList" style="margin-top:10px"><div class="empty">Todavía no hay archivos importados guardados en esta copia.</div></div></div></section></section>
+  <section class="view" id="resultsView"><section class="panel"><div class="screenTitle"><span>📚</span><h2>Consolidar resultados</h2></div><p class="help">Junta varias búsquedas que ya hayas importado sin volver a consultar Internet. BC+ usa los datos de tus archivos <b>.bcplusresult</b>, elimina duplicados por <b>artista + fecha + recinto</b> y te deja sacar un único archivo para trabajar.</p><div class="stepGuide"><div><b>1 · Importa</b>Guarda enero, febrero, artistas concretos, etc. desde 📥 Importar / archivos.</div><div><b>2 · Selecciona</b>Marca aquí las búsquedas que quieras unir.</div><div><b>3 · Consolida</b>BC+ combina los datos y elimina duplicados sin hacer una búsqueda nueva.</div><div><b>4 · Exporta</b>CSV para Excel, HTML autónomo o PDF listo para guardar.</div></div><div class="consolidateTop"><button class="btn" type="button" id="selectAllResults">☑️ Seleccionar todas</button><button class="btn" type="button" id="clearResultSelection">⬜ Limpiar selección</button><label class="tinyCheck"><input type="checkbox" id="includePendingResults" checked> Incluir señales pendientes</label><button class="btn primary" type="button" id="consolidateBtn">🧩 Consolidar seleccionadas</button></div><div id="resultPickList" class="resultPickList"><div class="empty">Importa al menos un archivo .bcplusresult para poder consolidar.</div></div><div class="consolidatedBox" id="consolidatedBox"><div class="screenTitle"><span>✅</span><h2 style="font-size:18px">Consolidado preparado</h2></div><div class="help" id="consolidatedSources">—</div><div class="conStats"><div>Búsquedas usadas<b id="conSourcesCount">0</b></div><div>Registros originales<b id="conRawCount">0</b></div><div>Duplicados eliminados<b id="conDupCount">0</b></div><div>Registros finales<b id="conFinalCount">0</b></div></div><div class="consolidateTop"><button class="btn" type="button" id="exportConCsv">📊 Excel / CSV</button><button class="btn" type="button" id="exportConHtml">📄 Documento HTML</button><button class="btn" type="button" id="exportConPdf">📕 PDF</button></div><div class="help">El CSV se abre directamente con Excel y conserva cada dato en su columna. El HTML es un documento autónomo. El botón 📕 PDF abre ese mismo consolidado en una vista de impresión y lanza el diálogo del navegador para elegir <b>Guardar como PDF</b>. Ninguna de estas exportaciones vuelve a buscar conciertos.</div><div class="conTableWrap" style="margin-top:10px"><table class="conTable"><thead><tr><th>Fecha</th><th>Artista</th><th>Ciudad / Recinto</th><th>Tipo</th><th>Estilo / interés</th><th>Origen</th></tr></thead><tbody id="consolidatedRows"></tbody></table></div></div></section></section>
+  <section class="view" id="alertsView"><section class="panel"><div class="screenTitle"><span>⚠️</span><h2>Alertas guardadas</h2></div><p class="help">Referencias manuales de señales pendientes; no son vigilancia automática.</p><div id="alertsList"><div class="empty">No hay alertas guardadas.</div></div></section></section>
+  <section class="view" id="concertsView"><section class="panel"><div class="screenTitle"><span>⭐</span><h2>Conciertos guardados</h2></div><p class="help">Artista + fecha + lugar, para poder comprobarlos de nuevo cuando quieras.</p><div id="concertsList"><div class="empty">No hay conciertos guardados.</div></div></section></section>
+  <section class="view" id="prefsView"><section class="panel"><div class="screenTitle"><span>⚙️</span><h2>Preferencias</h2></div><div class="prefBox"><b>💾 Funcionamiento local</b><div class="help">Esta copia de BC+ guarda únicamente en este dispositivo aquello que tú decidas guardar. No existe cuenta, servidor de usuarios ni sincronización automática.</div><div style="margin-top:8px"><span class="localNote">🔒 Datos locales</span><span class="localNote">🚫 Sin historial automático</span></div></div><div class="prefBox"><b>📧 Correos recordados</b>
+  <div class="help">Guarda varios correos y marca uno como ⭐ predeterminado. Ese correo aparecerá seleccionado automáticamente en el desplegable de la búsqueda.</div>
+  <div style="display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:10px"><input class="control" id="prefEmailInput" type="email" inputmode="email" placeholder="Añadir correo"><button class="btn" type="button" id="prefEmailAdd">➕ Recordar</button></div>
+  <div id="prefEmailList" style="margin-top:10px"><div class="empty">No hay correos recordados.</div></div>
+</div><div class="prefBox"><b>📥📤 Trasladar búsquedas</b><div class="help">Para mover una búsqueda entre móvil, iPad u ordenador usa archivos .bcplus. Solo transportan los 5 criterios de la búsqueda y nunca ejecutan nada automáticamente.</div><div class="inlineActions"><a class="btn" href="#transferView">📥 Importar / archivos</a></div></div><div class="prefBox"><b>🛟 Copia de seguridad completa BC+</b><div class="help">Guarda en un único archivo tus búsquedas, alertas, conciertos, archivos importados, correos recordados y correo predeterminado. Sirve para proteger tus datos o trasladarlos a otra copia de BC+ sin reconstruirlos uno a uno.</div><div class="inlineActions" style="margin-top:10px"><button class="btn" type="button" id="exportBackup">📤 Crear copia BC+</button><label class="btn" for="restoreBackupFile" style="cursor:pointer">📥 Restaurar copia</label><input id="restoreBackupFile" type="file" accept=".bcplusbackup,application/json" style="display:none" aria-label="Seleccionar copia de seguridad BC+"></div><div class="localNote">🔒 Archivo local .bcplusbackup · no modifica el Prompt Maestro</div></div><div class="prefBox"><b>🧹 Restablecer datos guardados</b><div class="help">Eliminará de este dispositivo las búsquedas, alertas, conciertos, archivos importados y correos guardados. Nunca modifica el prompt BC+.</div><button class="btn" type="button" id="resetLocalData" style="margin-top:10px">🧹 Restablecer datos locales</button></div></section></section>
+  <section class="view" id="guideView"><section class="panel"><div class="screenTitle"><span>❓</span><h2>Guía rápida</h2></div><div class="guide"><p><b>1.</b> Define correo, ubicación, periodo, artista y estilo.</p><p><b>2.</b> Pulsa 🔍 Buscar conciertos y revisa la configuración.</p><p><b>3.</b> Ejecuta BC+; el motor aplica sus reglas homologadas.</p><p><b>4.</b> Guarda manualmente solo lo que te interese. Cada copia conserva sus propios datos y no existe historial automático ni vigilancia automática.</p><p><b>5.</b> Para trasladar datos usa 📤 Exportar / 📥 Importar. Los archivos que confirmes quedan en 📦 Archivos importados y pueden coexistir varios.</p><p><b>6.</b> Para juntar búsquedas ya hechas abre 📚 Consolidar resultados, marca varias, pulsa 🧩 Consolidar y exporta a 📊 Excel/CSV, 📄 HTML o 📕 PDF. No se repite ninguna búsqueda.</p><p><b>7.</b> Desde ⚠️ Alertas guardadas y ⭐ Conciertos guardados puedes pulsar 🔎 Comprobar ahora para cargar sus criterios y repetir la comprobación manual. En ⚙️ Preferencias puedes crear una 🛟 copia de seguridad completa de todos tus datos locales.</p></div></section></section>
+  <section class="view" id="aboutView"><section class="panel"><div class="screenTitle"><span>ℹ️</span><h2>Sobre BC+</h2></div><div class="about"><div class="prefBox"><p><b>BC+ · Búsqueda de Conciertos Plus</b> permite realizar búsquedas profundas y personalizadas de conciertos, contrastar la información encontrada y acceder a las fuentes y opciones disponibles.</p><p class="help">App: interfaz v0.20<br>Prompt activo: BC+ v1.0<br>✅ Homologado<br>💾 Funcionamiento local · sin cuenta común</p></div><div class="prefBox creatorLarge"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCACMAIwDASIAAhEBAxEB/8QAHQAAAQUBAQEBAAAAAAAAAAAAAAQFBgcIAwIBCf/EAEwQAAEDAwEGAwMGBw4FBQAAAAECAwQABREGBxIhMUFRE2GBIjJxFFKRobHBCBUjQmKiwhYXJDNDRFNjcoKSo7LRJXODs/AmNGTS4f/EABoBAAIDAQEAAAAAAAAAAAAAAAMEAAECBQb/xAA0EQABAwIDBAgFBAMAAAAAAAABAAIDESEEEjETQVGBIjJhcaHB0fAFFFKR4SMzQrFTwvH/2gAMAwEAAhEDEQA/ANU0UUVFEUUUVFEUVHdQ6shWhLiEqQ6+jgvK91DZ/SV38hk+VZ/2ibbWXHHIloeVdXhwX4X5OM2e3E4V673pS0mKa12RgzO4Dz4IzICRmdYdq0ZK1DbI6lJ+Uh5xPApYBcIPYkcB6kU2v6xitjeKGmk95ElCPs3qxtI1TfbyrNzv64THRmEjJA7bx5emKTCNYHF78tqfcHOq5UonPoP96qmJfvDfH0V1hbxPgtgubRrO2vDl3sSPL5bk/ZSmLru1yCAzOtb5/qpgJ+ysfpTpxIwnT0LHmVn765rj6ad96xtN+bLqkEfbU2M/+Tw/KrPH9Pittx9RQ3SAoLTnqkhY/VJP1U5xpTEpJVHdQ4Bz3TnHx7VhWK4iEc2S/Xe2nohxzxm/oP8AtUotO07VVjKFT0s3WKj+cRD7aR5pzkehFTNiI+sA4dlj9vyrpE7Q071siiqc0FtptV7ShuQ8CrgDn2VA9jy+g4Pmat2HKYmMJejOJcbPUfYex8qLHM2TTXhvWHxuZqu1FFFFQ0UUUVFEUUUVFEmuU1m2wXpkrfDDKd5ZQgrIHfA41VGs9qcaQyuJpp1Dqin2lh9DalE/mjeUCkefM9Mc6VbbtetadskmOy6Eq3Sl1QPM/M+vj3yB1OMpaenqvS58SYjcnRgqVHUfeCOamz6ccdD61z8TM4hwj0GpTkETQQX6nRSvU9g2kaxO6m0qMDOERWJTW6R3WQrj8BTInY3tFAG9pp8AcgHmgB8BvVZ1n1/btDWJt6d+XnLSFNxgvdAHQrV0HkASe1QbU/4QGq7s4pMGY5DY6Nwmktgf3lbyj9VL4GWZzCGsAG7tW8VG0Pu6qbTst1xGGZFkLQHMrlMj7V14RofUqDhUOMD2+Xx//vUdl7QNSSVFUy43dxJ+dLKh9BTinrSl6/GT7apqhIilaW3nSgIdjlXAKVjgpP8A5wo8k2JjGZwCxHFC80BKdWdAase/ira2v+zMYP7dK0bLtcufxdjWr4SWT+3V+aC0eWUeJKSEJRzNI9r+0+PoOJHgWaI3Lu8oHwW1e6lI4b6sccZ5DrSUXxSeQ2aL6dqJLhY2GjSSqLd2W65R79kKfjKZH7dI3dnusoyt4wGmlDqZzA/bpuvO1/V86SvevDhVnimI0htseQJBJpq/fE1ET/CnXJCeoeS2r9inw/GEVo3xQQzDixJTnJ0fqJMkPlqCxKT/ACyLlGSr1G/g+tWpsv1hqfTshDN2ctzkZOElSblHVkfDfzjy6dD0NQs6jtF7IauDZt0lXAOoBLefNJJ+o+lP1nsbFkdduV3Q29FYaVIQUnKHUpGcg+ZwnyJ48qXmmfbaCjtyYjjbToGoWybHq62XdyOxHcJkvIK/DR+UCQOZKk5GPPl68KkNZA/B815Le1hIRPkIRKuRK4+eDat3+S8sDA3fgRxHHXEGUiZGS6gFPRSTzSocwaehmLiY39YJOWMCjm6Fd6KKKZQUU23+4G329S2yPHX7DeeODjJPwAyfq605VTe3vVC7TpiaqG5ifKWLbBAPJavfX6YP+Cl8TIY2dDrGw7yixNDndLQLPm0rUH491BKkJUVwYLqmYwJyHnx7yz3Cc+qjmoPpeS7br+5KaZVJkrYcbbbz761DHEnpzPpXaY63lDDBzHYT4TZ7gc1fEnJ9aa5jYWk960zDtbFst39qnTOc/OlirTcrrNckTSH5G8Qob49k9sdKdk6ZuseOXjbH/BSMlaUZAHpXIuyLnot29x3Vt3ywvNtPvoPtPxnOCCvuUqG7k8wRnlU+0dtIemWNO7usyW8IfQjgM9FDyP25rcRBFAKUssvF6neq6O4pJSoDsQRUj2PWlu4bQDAx+SlQ3goeaQFA/SK9amis3guzLc2lucgFbjKBgPJ6kD5w7daU7ApIG1CG5nlEk8f+maDjCNg+vBbgqJGkLWN+uqLfbWmGeB3BnHU4rI+0Oa5e9WaluG8VJgxlNNn5uAE8P7yjV3a6v4iRpD7iuDTZV9AqntDWB7UGntQIU+0w7MaCC+8cIQVuoypR7V5zDP6ZmdpYcqrrvjysyDW5VZQkNssJwBnHOlMdiROc8OHHekL+a02Vn6qsS527Z5oxoNO3f90d0SMKLSN5lJ8gCEn1JqJ3DaA8slEBp9pgcm0r8NH+FAFehGJdJ+2w04my5exa0Ve7zXhvQOpZgG7YpnHotIQfoJFPrGldcwdNXC0zNP3R23vNlTK0N+IWlcDj2SfZOAPorlpq83hxpM+U+xbon8mrwfFddx80KPL9I/XUtY2w6ktIQzBuqpBcUG2mVQGlKcUTgJSE8T0rD24h/Wa2neaqwYmXYTVVFDRKtEtLUgPwnUrStKlJKFsuD3VjPHgfqrYWxfaKL/BZVPUluckiNORngHBwS4PI8PQ/o1ROrdp6pMr8XartdtuUlJ3ZCGU4DB6o3iSCsdd0gA8MmvmlJcGBeW7vpd91UMoDc+3yDh5pP5rg+egZ3SRkgHj3oMz5CBKW0c3mDxHNFjYyuStQfuFt+imXR90F2sEd/f31pG4tXcgDB9QQfWnqukxwe0OGhSTmlpIK4XCQIkGRIIyGm1Lx3wM4rFu3fUa52pmIiHN5q3R1Y483XDgq+OAT61rbaHN+Q6SnPZwcD7cn6ga/P7V81Um9zXFqJKnt3j2SkD7c0q8Z8S0fSCeZsjt6MJPE080lS7w518U5kUjS5wpXbYcu6S0xbfHckSFckIGcDuew8zThIAqUuBXRSTRH5Swa7ZPFK7QF480vtkVD7BKdhXVstAqS57C0D85P+/UeYq07Dpd2xaY1U9LfSuRIta0FCB7KcONnn1Ppj41W1kY3tQQR3dFKxytcHvYaivkEd0ZaWtdb/qk6py47yHGV4UkhSFDr2NS/ZuxEGsm7/GdSyVMvNOxgnglxSDlQPQHHLvUXvi2b3Y2NQ29tLZWrwpzCOTL+MkgfNX7w894dqYLPenLXPS8kqLSvZcSDzT5eY6VJW/MwuaLE1H4UjOxkBNwrM2p3dT7YiNqyZCwD/ZHE/dTm3bxF2Gaoexha4yfo8VFQGYXbjfYzileKwtALKxyUnv8AHvVz6ogiLsA1IrGMx2x/mIrgluyfFF23XVc7Mx7+yiy7FiJKd5fE082uHH3VTJif4I0cBA4F5fRI+89BSS1x/lasKX4cdtO86581P+9ep80y3kIYQW47Y3Wm/mjufM9a9QuGllxu63ip54+yAEpQngMdEpHQUs0Q8uIm+6ldwZVuhkReHBt5w7iVD+yCojzwaZJsBbZhqWreDrZWAOScKKT68KkcBjw9nWqVdQuKP1lUCZ2aO28geNEWNtH392qoUyzvoKlklR4knqae7JLejpStpe7Ijq3m19j2+B5EdeNNTagGwKd7IwDDfkOcEBWAT5DjR6bkJbI2A3YSbShgH8k6wl5sE8hwOPiN8p/6dW7Wedhyl2u5WG3u5S6bYw84g8N3xVPKAPnhaPoFaGpXCEZC0biQj4gdIOO8KC7aVlGg5hT3P+hVYB1Ao/jWVno+7/qr9CdrMUy9C3FAGSkJOPid376wfKsbtz1i9BSFBPiF1wpHEIISrh5knA8zWS4MncXfT5rQaXQgDinXZVs4uevp7im3EwbLG9qXcHeCGwOJCc81Y9B1qX6u11pnRsRzT2ziGiQpPsv3F0bxcV3z+d9nlUd2ga8casTGjtNkRLRGG7ILJx46xzBPVIP0kE9qrdgBI86oRHFAOmFBw9VRdsDRhvx9FYGip825MawkXKS5IeXaSMrPL8qjgB0FMmn2s6mt3/OH305bP1fwLVA723H+aik2nh/6nt3/ADh9hrZAa2QD30QqBJcwn3dN+jrwizTliYlTlqmJ8Ca0OZRngsfpJPtD4edc9U2pyzXVyOVpcZUA4y6n3XWzxSoeRFII6QpnBqQWxRvlmNkf4zIaVOwVnmpHNTX3j1Fbf+m7abjr6+vZ3LLemMm/d6e/NddBXRCJbcCasJaUveYcVybX5+RrRe0eWw5sNnQWlIRJlhLIbKhkKCkkj7/MY71lBptSFEHgoGrWtclWu9GKs/jFGpLegqiknAmMgcWj+mPzT8R2wni8GHStnrShujQzkMMRFa6Ks5jyG2EQYZywg5Wsc3V9/h2pM84YjQSj/wBy4Mj9Ad/j2+ntSh1IgoK30flQSlLSuBKh0I8uv/7SNpClFTrx3nFHJJro62Sul1KTHzZdPHH8zX/3nKdGwBs41aB0XE/1qpM+QjT2nz/8Nf8A33K9251p3S97gSFuNqnuMBndQVKXuqUSEjqeI+mgEExW4/7ItaP5eShVuiuznQ0zgYGVrPuoT3NW5sq0QNVzg9KCmdJWr8pMkKGPHKePhJ7lR59gfMUj0to5qQAi5Ewrc2QVRUL/AC7x/rVD3PhzHYc6XbVtpjKbE3o3SCUR4KB4b6mBupx8xOPrP38gS4svfsYLnedwRG4fK3aSWHiVOtkWojqjatfLogAR1yGWWQnkEIWkADy48PKtRVkf8FWDm6pWkcFvFXoneP7Fa4omDaG5wNK/0AqxBrl7kivcP8YWebE6vMqQk9iRwP04rImpIrGnLTq28ITu3F9iNDi8MFCluLyr4hOPVNbIrNv4QemnAuY1GbJEopksJA95QXvFPxyVgDutI61jGR1cx+6tD3VWsM/oubv1HeslLZVvuKxwQrdoQakLsZtE1RUMxpQ4H5qu1Ms+KuI+Uq93oe9PpRSzQKsRNSedvx/mJrxp8galt5/rfuNcdEubsDUS+ghJBPxcSK52B4HUcDH9J9xpZ3Vl9/xCONWe96Z4n8WKlGg4vyrUamgSlRjOlKk8wQAQRUWiqwnBqbbKMK1kc9Ib5/VqYw0geexVh/3W96br5GS+pU5pASoq3JCBySvuPI8/pHSktrckQnzPiqW2uIPGK0c0gVZundFSL3bZS4yCp9QOEf0g54+Pbzpyi6IjxNDz7Y442m+3RAR7Qz8lRvA4Vj8444jmOXeuez4lGGZDcggcuPJOSYN2fMN91REuXIutxenzllbzqioknuc/fT9prSV91O+GbJbJEnusIO4nzJ5Vf+htkOldPQk3LUbrckNgKU9NWG2U+nL6aedW7bNO6eta4OlIC5ygMeIhHyeOn4EjKvQY86Mz4gJatwza036BLPgLD+obquH9nq7TZYA1NKabVCZLQZj4WtWVqXxJ9ke9j87lUGud4ZiPvIhlEFlKfbUglb60+avex5DA8qTav1jqTUzqXpkpMWI8krQ3G9kFOSOfM8QetMNsYbTaNQEJyoREnJ4nPio4/XUjhmLc0zuQ0uUUyRg0jF+J7l7uurpkiIYNuKosP84g+2v4npTHBZI33d3Ib5Duo8hXyOyp1SUIBKlcABU10zZPll1YjNAFmGQ48vmC6eQ+AwT/AHfOmnbPDsOUUQG553XK0j+DDYjDhLfUODLQRnupXDP6qz/eq/KjGzex/iDSkSOtBQ+4PFdSeaSQAEnzCQB8Qak9awzCyMZtTc81mdwc800RUX2i6bTqbTj0dCQZTQK2eOCTjinPTPQ9CAelSiiivYHtLToVhri01Cw/qaPb47qk6nhvseIvcFyjJADqunjNngF8+I3ckHJzTedDwrzGBtd9ZfQfdDsde8PVG8K1LtO0lFfgXKSqCiXbpreJzG7lSD/TIxx6DOOWAocjnIt/02bFLVGdddMB5WGJaFFIV2S5jhvY68iOIrnRbRj9iXUO7eCOzgexOPyPbtMtR/RXG6wGNK2OXaI8tqfdJzqTJXHyW2GkHKUb3VRVxPbAHOonEekW+5RZiGlFTDqXAkg4ODnFLbjAlQ1YEh8DoQs4NNK3paVYVJe/xmn2soCDeuqULr1UrvmmXFJVd9M5uNmfPibrHtPRCeJbdbHtJx0VjB70s2QBx3WbjaG1KcMJ9ISBxyRjFRnTcC63y9xbda33vlT6t0K8QpCB1Uo9ABxrRd0c0nsf0s1Z7QPxtquagLkEe+rPIrP5iOyeZ5+dJYp5bEYRckc6cSjwCrxJoKpDdb5IsttMKE6iK2hOHXt7dA75V/4PjUEVtBTbQ6uzNfK5CRlcuQk+GnzSnmr1wPI0miWG961uaF3FxSgVZS0gYQ38By9Tk+dW7I2SxIeza/MRYwdu8iErwVK4qKk4UEp7E7uPWuQ35eEtjf0iTy58V0pHSuBcLDxWeL3rm6XeSH5r7s18e4qScob/ALCB7KfSmb/it/uDUcF6XKeUENsoHM9gBSJhPHChgjgQeYp7hXe4wIy2Lc83HQ4N1xTbYStY7FY9ojyzivShuVtGBcWtTVxTrqhpqC5EtcdxLxt8dMd1xs5Sp3JUvB6gFRGfKkWk34ibq/CuzwjwbgwqK4+RwZJIKVnyCgM+WabxcbgjglTPw8OurSJ8paEKbbcedO620hrK1n4VksGTIffatBxzZgnP9zd3s16RbHYilT3juxlpOW3Un+UQscCnHHeHIVpXYns7aYlM+KA7GhEOyXSP4584IT9hI6AJHU1XGyLRV9vc1m2x5zqIrRDklTZywwD80HhnnjGCT5AmtgWW2RbNbGIMFBSw0MDJypRPEqUepJySe5pZrTO8E9UeJ9AjlwhaQNT4BLaKKKeSiKKKKiiKqDadsv8AlrEmXp+O06hwEyLasDcWOZ3O3Hju8OPFJB52/RQ5YmyijluOR0ZqFhGbpqWwp5qFHemR21FLkB3IkMnqEZ9/Hb3vI86iEyyNSkrctjwcUknfYWNx1B6gpNb41Vou06jV48hosXBIwiWzgLHYK6KHkQfLFVvqjZnGlpV+6SxG6bow3dLSS3KSOm8jO8fQrHlSrjNEbjMOI15j0R6xvFrHh6FZr2eqVZrVebs00pMqHhLpWcjHEpAGOAzjPfdpmhazjoedkS7SqZLeWXHn3JJ3nCe/D6qtWXo+JY13Zm23py4W+4RlRZUGWz4cpsc0rTyypJ48UjIyOtVNH0hcmlByO20/uHgWpDZzjulRB9KBGYZXvLjrTiOX3RXbWNrQ0eandg23LswAg6Vh8Oqn1E0/u/hC3eYAFaXZ4cvDklOPqqvZen/lsZAOmLkzMAwpyMQW1Hvu8cfTXm27NNRT3gmFZ7irPz1ttj6VKFX8pg6Vc0Dn+Vl0s9ag15fheNZXu2agmOzTpT8XXF0lS3WJ4CXFfOUjdxnvjGaj8aA8tO8sBCPnKOKt637DdQR44kX2fabJG6qkSfEX6BOB+tUs07ssti3Em2wJ2pZA/nMxPgw0nuAcJV+v8KYGIiiGSOruwVKDs3yHM6g8FSFn0/InoL0NsCKk4XNfylpJ7Dqs+Scn4VauzHZfN1E9vQUuRrWfZkXR9A33h1Q2nkB5Dh84nlV32LZXELzUrU7qJy0ABENobsdsdsc1Dy4J/Rqymm0MtIbaQlDaBupSkYAHYCtBkk15bDh6lXmZH1Lnj6Js01YLdpu0tW+0sBlhHEnmpauqlHqTTrRRTIAAoEAmtyiiiirVIoooqKIoooqKIoooqKJDdbRbrs14V0gRZjfRL7SV4+GRUSn7JdGzCpX4p+TqVzMd9aAfQHH1VO6Ky5jXdYVWg5zdCqu/eP0kF7yDck+QkA/amnm27MNPwBhtVyWOoM1xIP8AhIqcUUP5eL6R9lrbSfUUyQNKWGC8Ho9qi+OOTriPEcH95WT9dPdFFFAAsFgknVFFFFWqRRRRUURRRRUUX//Z" alt="MVV"><p><b>Creado con MVV</b></p></div></div></section></section>
+</main>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const months=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  let currentConfig=null;
+  function val(id){return ($(id)?.value||'').trim();}
+  function checked(id){return !!$(id)?.checked;}
+  function clearInvalid(){document.querySelectorAll('.invalid').forEach(x=>x.classList.remove('invalid'));}
+  function fail(el,msg){ if(el) el.classList.add('invalid'); alert(msg); if(el?.focus) el.focus(); return null; }
+  function stylesFrom(containerSel, otherId){
+    const parts=[];
+    document.querySelectorAll(containerSel+' .stylegrid input[type="checkbox"]:checked').forEach(cb=>{
+      const t=(cb.closest('label')?.textContent||'').trim(); if(t) parts.push(t);
+    });
+    const other=val(otherId); if(other) parts.push(...other.split(',').map(x=>x.trim()).filter(Boolean));
+    return [...new Set(parts)];
+  }
+  function monthIndex(m){return months.indexOf(m);}
+  function resolvedYear(selectId,otherId){
+    const v=val(selectId);
+    if(v!=='OTHER') return v;
+    return val(otherId);
+  }
+  function toggleOtherYear(selectId,otherId){
+    const show=val(selectId)==='OTHER';
+    const el=$(otherId); if(!el) return;
+    el.style.display=show?'block':'none';
+    if(show) el.focus();
+  }
+  function collect(){
+    clearInvalid();
+    let email='🚫 Sin correo';
+    if(checked('emailUse')){
+      const emailChoice=$('emailChoice')?.value||'CUSTOM';
+      if(emailChoice==='CUSTOM'){
+        const e=val('emailValue');
+        if(!e || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return fail($('emailValue'),'📧 Escribe un correo válido o elige 🚫 Sin correo.');
+        email=e;
+      } else email=emailChoice;
+    }
+    const fm=val('fromMonth'), fy=resolvedYear('fromYear','fromYearOther'), tm=val('toMonth'), ty=resolvedYear('toYear','toYearOther');
+    if(!fm) return fail($('fromMonth'),'📅 Falta seleccionar el mes Desde.');
+    if(!fy) return fail(val('fromYear')==='OTHER'?$('fromYearOther'):$('fromYear'),'📅 Falta seleccionar el año Desde.');
+    if(!/^\d{1,4}$/.test(fy) || +fy<1) return fail(val('fromYear')==='OTHER'?$('fromYearOther'):$('fromYear'),'📅 El año Desde no es válido.');
+    if(!tm) return fail($('toMonth'),'📅 Falta seleccionar el mes Hasta.');
+    if(!ty) return fail(val('toYear')==='OTHER'?$('toYearOther'):$('toYear'),'📅 Falta seleccionar el año Hasta.');
+    if(!/^\d{1,4}$/.test(ty) || +ty<1) return fail(val('toYear')==='OTHER'?$('toYearOther'):$('toYear'),'📅 El año Hasta no es válido.');
+    if(+ty<+fy || (+ty===+fy && monthIndex(tm)<monthIndex(fm))) return fail($('toMonth'),'📅 Hasta no puede ser anterior a Desde.');
+    let artist='🚫 Sin artista', artistRaw='';
+    if(checked('artistWrite')){ artistRaw=val('artistValue'); if(!artistRaw) return fail($('artistValue'),'🎤 Has elegido especificar artista(s), pero el campo está vacío.'); artist=artistRaw; }
+    let location='';
+    if(checked('locGlobal')) location='🌐 GLOBAL';
+    else if(checked('locCustom')){ const l=val('locationValue'); if(!l) return fail($('locationValue'),'📍 Has elegido especificar ubicación, pero el campo está vacío.'); location=l; }
+    else location=artistRaw ? '🌍 Sin especificar → GLOBAL por artista' : '🌍 Sin especificar → Madrid/España por regla BC+';
+    let style='';
+    if(artistRaw) style='🔒 No procede';
+    else if(checked('styleBase')) style='🎧 Preferencias musicales BC+';
+    else if(checked('styleCustomMode')){
+      const arr=stylesFrom('.styleCustomReveal','styleCustomOther');
+      if(!arr.length) return fail($('styleCustomOther'),'🎵 Has elegido estilos desde 0, pero no has marcado ni escrito ninguno.');
+      style='🎯 Solo: '+arr.join(', ');
+    }
+    return {email,location,period:`${fm} ${fy} → ${tm} ${ty}`,from:{month:fm,year:+fy},to:{month:tm,year:+ty},artist,artistRaw,style};
+  }
+  function showReview(){
+    const c=collect(); if(!c) return; currentConfig=c;
+    $('sumEmail').textContent=c.email; $('sumLocation').textContent=c.location; $('sumPeriod').textContent=c.period; $('sumArtist').textContent=c.artist; $('sumStyle').textContent=c.style;
+    $('amplitudeBox').style.display='none'; $('searchActionbar').style.display='none'; $('executionBox').style.display='none'; $('reviewBox').style.display='block';
+    $('reviewBox').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function correct(){ $('amplitudeBox').style.display='none'; $('reviewBox').style.display='none'; $('executionBox').style.display='none'; $('searchActionbar').style.display='flex'; $('bcForm').scrollIntoView({behavior:'smooth',block:'start'}); }
+  function handoff(c,forceComplete=false){
+    const confirm=forceComplete?'\n\n⚖️ CONFIRMACIÓN DE AMPLITUD: El usuario ya ha elegido 🚀 Mantener búsqueda completa. Ejecuta la búsqueda completa sin volver a pedir confirmación y sin límites artificiales.':'';
+    return `BC+\nEjecuta una búsqueda real aplicando exactamente el Prompt Maestro BC+ v1.0 homologado y sin modificarlo.\n\n📧 CORREO: ${c.email}\n📍 UBICACIÓN: ${c.location}\n📅 PERIODO: ${c.period}\n🎤 GRUPO / ARTISTA: ${c.artist}\n🎵 ESTILO: ${c.style}${confirm}\n\nAplica primero el control de amplitud del Prompt Maestro BC+ v1.0. Si determina ⚠️ BÚSQUEDA MUY AMPLIA y no existe la confirmación anterior, NO ejecutes todavía la búsqueda. Muestra el aviso homologado y genera además un archivo .bcpluscontrol con nombre descriptivo único: BCPLUS_CONTROL_<artista-o-estilo>_<ubicacion>_<periodo>.bcpluscontrol. Debe incluir format=BCPLUS_CONTROL, type=amplitude_warning, los cinco criterios, un campo reference humano y el motivo breve. NO reutilices un archivo genérico anterior.\n\nSi la búsqueda puede ejecutarse —o el usuario ya confirmó mantenerla completa— devuelve el resultado en el formato homologado y genera además un archivo .bcplusresult con nombre descriptivo único: BCPLUS_<artista-o-estilo>_<ubicacion>_<periodo>.bcplusresult. Debe incluir un campo reference humano. NO uses ni reutilices el nombre genérico BCPLUS_RESULT.bcplusresult. Estos archivos son solo puentes locales y no modifican el Prompt Maestro ni el resultado homologado.`;
+  }
+  function execute(){
+    const c=collect(); if(!c) return; currentConfig=c;
+    $('reviewBox').style.display='none'; $('searchActionbar').style.display='none'; $('executionBox').style.display='block'; $('handoffText').value=handoff(c);
+    try{sessionStorage.setItem('bcplus_current',JSON.stringify(c));}catch(e){}
+    $('executionBox').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  async function copy(){
+    const text=$('handoffText').value;
+    try{await navigator.clipboard.writeText(text);}catch(e){$('handoffText').select(); document.execCommand('copy');}
+    $('copyStatus').style.display='inline-flex'; setTimeout(()=>$('copyStatus').style.display='none',1800);
+  }
+  function exportConfig(){
+    if(!currentConfig) return;
+    const criteria={email:currentConfig.email,location:currentConfig.location,from:currentConfig.from,to:currentConfig.to,artist:currentConfig.artistRaw||currentConfig.artist||'',style:currentConfig.style};
+    const payload={format:'BCPLUS',version:1,reference:deriveReference(criteria),criteria};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=('BCPLUS_'+deriveReference(criteria)).replace(/[^a-z0-9_-]+/gi,'_')+'.bcplus'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  }
+
+  let currentResult=null;
+  let currentConsolidated=null;
+  let pendingBridgePackage=null;
+  let pendingSearchPackage=null;
+  const storeKeys={searches:'bcplus_saved_searches_v1',concerts:'bcplus_saved_concerts_v1',alerts:'bcplus_saved_alerts_v1',imports:'bcplus_imported_packages_v1',emails:'bcplus_remembered_emails_v1',defaultEmail:'bcplus_default_email_v1'};
+  function loadStore(key){try{return JSON.parse(localStorage.getItem(key)||'[]')}catch(e){return []}}
+  function saveStore(key,data){try{localStorage.setItem(key,JSON.stringify(data))}catch(e){alert('No se pudo guardar en este navegador.');}}
+  function getRememberedEmails(){
+    const arr=loadStore(storeKeys.emails); return Array.isArray(arr)?arr.filter(x=>typeof x==='string'&&x.includes('@')):[];
+  }
+  function getDefaultEmail(){try{return localStorage.getItem(storeKeys.defaultEmail)||''}catch(e){return ''}}
+  function setDefaultEmail(email){try{if(email)localStorage.setItem(storeKeys.defaultEmail,email);else localStorage.removeItem(storeKeys.defaultEmail)}catch(e){} refreshEmailDropdown(email||'NONE');renderEmailPreferences();}
+  function updateEmailCustom(){
+    const use=checked('emailUse');
+    const custom=use && $('emailChoice')?.value==='CUSTOM';
+    if($('emailCustomWrap')) $('emailCustomWrap').style.display=custom?'block':'none';
+    if(custom) setTimeout(()=>$('emailValue')?.focus(),20);
+  }
+  function updateEmailMode(){
+    if(checked('emailUse')){
+      const current=$('emailChoice')?.value;
+      if(!current || current==='NONE') refreshEmailDropdown(getDefaultEmail()||'CUSTOM');
+      else updateEmailCustom();
+    }else{
+      if($('emailCustomWrap')) $('emailCustomWrap').style.display='none';
+    }
+  }
+  function refreshEmailDropdown(preferred){
+    const s=$('emailChoice'); if(!s) return;
+    const before=preferred!==undefined?preferred:s.value;
+    const emails=getRememberedEmails(); const def=getDefaultEmail();
+    s.innerHTML=emails.map(e=>`<option value="${esc(e)}">${e===def?'⭐ ':''}${esc(e)}</option>`).join('')+'<option value="CUSTOM">➕ Escribir otro correo…</option>';
+    let target=before;
+    if(!target || target==='NONE') target=def||emails[0]||'CUSTOM';
+    if(target!=='CUSTOM' && !emails.includes(target)) target=def||emails[0]||'CUSTOM';
+    s.value=target; updateEmailCustom();
+  }
+  function addRememberedEmail(){
+    const input=$('prefEmailInput'); const email=String(input?.value||'').trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('📧 Escribe un correo válido.');return;}
+    const arr=getRememberedEmails(); if(!arr.some(x=>x.toLowerCase()===email.toLowerCase())) arr.push(email); saveStore(storeKeys.emails,arr);
+    if(!getDefaultEmail()) try{localStorage.setItem(storeKeys.defaultEmail,email)}catch(e){}
+    if(input) input.value=''; renderEmailPreferences(); refreshEmailDropdown(getDefaultEmail()||email);
+  }
+  function deleteRememberedEmail(email){
+    const arr=getRememberedEmails().filter(x=>x!==email); saveStore(storeKeys.emails,arr);
+    if(getDefaultEmail()===email) setDefaultEmail(arr[0]||''); else {renderEmailPreferences();refreshEmailDropdown();}
+  }
+  function renderEmailPreferences(){
+    const box=$('prefEmailList'); if(!box) return;
+    const arr=getRememberedEmails(), def=getDefaultEmail();
+    box.innerHTML=arr.length?arr.map(e=>`<div class="storedCard"><b>${e===def?'⭐ ':''}${esc(e)}</b><div class="storedActions"><button class="tinyBtn" type="button" data-default-email="${esc(e)}">${e===def?'⭐ Predeterminado':'☆ Hacer predeterminado'}</button><button class="tinyBtn danger" type="button" data-delete-email="${esc(e)}">🗑️ Eliminar</button></div></div>`).join(''):'<div class="empty">No hay correos recordados.</div>';
+    document.querySelectorAll('[data-default-email]').forEach(b=>b.onclick=()=>setDefaultEmail(b.dataset.defaultEmail));
+    document.querySelectorAll('[data-delete-email]').forEach(b=>b.onclick=()=>deleteRememberedEmail(b.dataset.deleteEmail));
+  }
+
+  function esc(x){return String(x??'').replace(/[&<>\"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[m]));}
+  function cleanLoc(loc){
+    loc=String(loc||'').trim();
+    if(loc.startsWith('🌐')) return 'GLOBAL';
+    if(loc.startsWith('🌍 Sin especificar')) return loc.includes('Madrid')?'Madrid/España':'Sin especificar';
+    return loc.replace(/^📍\s*/,'')||'Sin ubicación';
+  }
+  function deriveReference(c){
+    c=c||{};
+    let subject=String(c.artist||c.artistRaw||'').trim();
+    if(!subject || subject.includes('Sin artista')){
+      const s=String(c.style||'').replace(/^🎯\s*Solo:\s*/,'').replace(/^🎧\s*/,'').trim();
+      subject=s||'Búsqueda BC+';
+    }
+    const loc=cleanLoc(c.location);
+    let per=c.period||'';
+    if(!per && c.from && c.to) per=`${c.from.month||''} ${c.from.year||''} → ${c.to.month||''} ${c.to.year||''}`.trim();
+    return [subject,loc,per].filter(Boolean).join(' · ');
+  }
+  function criteriaMeta(c){
+    c=c||{};
+    const per=c.period||((c.from&&c.to)?`${c.from.month||''} ${c.from.year||''} → ${c.to.month||''} ${c.to.year||''}`:'—');
+    return `📧 ${esc(c.email||'🚫 Sin correo')}<br>📍 ${esc(c.location||'—')}<br>📅 ${esc(per)}<br>🎤 ${esc(c.artist||c.artistRaw||'🚫 Sin artista')}<br>🎵 ${esc(c.style||'🎧 Preferencias musicales BC+')}`;
+  }
+  function setYearField(selectId,otherId,year){
+    const y=String(year||''); const s=$(selectId), o=$(otherId); if(!s) return;
+    if([...s.options].some(opt=>opt.value===y)){s.value=y; if(o){o.value='';o.style.display='none';}}
+    else if(y){s.value='OTHER'; if(o){o.value=y;o.style.display='block';}}
+    else{s.value='';if(o){o.value='';o.style.display='none';}}
+  }
+  function clearStyleChoices(){
+    document.querySelectorAll('.styleCustomReveal .stylegrid input[type="checkbox"]').forEach(cb=>cb.checked=false);
+    if($('styleCustomOther')) $('styleCustomOther').value='';
+  }
+  const monthNames=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  function monthNameFromNumber(n){return monthNames[Number(n)-1]||'';}
+  function extractMonthYear(text){
+    const s=String(text||'').trim();
+    let m=s.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+    if(m) return {month:monthNameFromNumber(m[2]),year:Number(m[3])};
+    const norm=s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    const names={enero:'Enero',febrero:'Febrero',marzo:'Marzo',abril:'Abril',mayo:'Mayo',junio:'Junio',julio:'Julio',agosto:'Agosto',septiembre:'Septiembre',setiembre:'Septiembre',octubre:'Octubre',noviembre:'Noviembre',diciembre:'Diciembre'};
+    m=norm.match(/(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|setiembre|octubre|noviembre|diciembre)\s+(?:de\s+)?(\d{4})/);
+    if(m) return {month:names[m[1]],year:Number(m[2])};
+    return null;
+  }
+  function parsePeriodCriteria(c){
+    if(c?.from && c?.to) return {from:c.from,to:c.to};
+    const p=String(c?.period||'');
+    const parts=p.split(/\s*(?:→|->|–|—)\s*/);
+    if(parts.length>=2){
+      const a=extractMonthYear(parts[0]), b=extractMonthYear(parts[1]);
+      if(a&&b) return {from:a,to:b};
+    }
+    const one=extractMonthYear(p);
+    return one?{from:one,to:one}:null;
+  }
+  function criteriaForStoredEntity(item){
+    const base={...(item?.criteria||{})};
+    const eventMY=extractMonthYear(item?.date||item?.period||'');
+    const basePeriod=parsePeriodCriteria(base);
+    const from=eventMY||basePeriod?.from||base.from||null;
+    const to=eventMY||basePeriod?.to||base.to||null;
+    const artist=String(item?.artist||base.artist||base.artistRaw||'').trim();
+    const city=String(item?.city||'').trim();
+    let location=city||String(base.location||'').trim();
+    if(location.startsWith('📍 ')) location=location.slice(3).trim();
+    const email=String(base.email||'🚫 Sin correo').trim()||'🚫 Sin correo';
+    const out={
+      email,
+      location:location||'🌍 Sin especificar → GLOBAL por artista',
+      artist:artist||'🚫 Sin artista',
+      artistRaw:artist||'',
+      style:artist?'🔒 No procede':(base.style||'🎧 Preferencias musicales BC+')
+    };
+    if(from&&to){
+      out.from={month:from.month,year:Number(from.year)};
+      out.to={month:to.month,year:Number(to.year)};
+      out.period=`${out.from.month} ${out.from.year} → ${out.to.month} ${out.to.year}`;
+    }else if(base.period){
+      out.period=base.period;
+      if(base.from) out.from=base.from;
+      if(base.to) out.to=base.to;
+    }
+    return out;
+  }
+  function applyCriteriaToForm(c){
+    if(!c) return;
+    const email=String(c.email||'').trim();
+    if(email && !email.includes('Sin correo')){
+      $('emailUse').checked=true;
+      const remembered=getRememberedEmails();
+      refreshEmailDropdown(remembered.includes(email)?email:'CUSTOM');
+      if(!remembered.includes(email)) $('emailValue').value=email; else $('emailValue').value='';
+      updateEmailMode();
+    }else{
+      $('emailNone').checked=true;
+      refreshEmailDropdown(getDefaultEmail()||'CUSTOM');
+      $('emailValue').value='';
+      updateEmailMode();
+    }
+    const loc=String(c.location||'').trim();
+    if(loc==='🌐 GLOBAL'||loc==='GLOBAL'){$('locGlobal').checked=true;$('locationValue').value='';}
+    else if(!loc || loc.startsWith('🌍 Sin especificar')){$('locNone').checked=true;$('locationValue').value='';}
+    else{$('locCustom').checked=true;$('locationValue').value=loc.replace(/^📍\s*/,'');}
+    $('fromMonth').value=''; $('toMonth').value=''; setYearField('fromYear','fromYearOther',''); setYearField('toYear','toYearOther','');
+    const parsedPeriod=parsePeriodCriteria(c);
+    const cFrom=c.from||parsedPeriod?.from, cTo=c.to||parsedPeriod?.to;
+    if(cFrom){$('fromMonth').value=cFrom.month||'';setYearField('fromYear','fromYearOther',cFrom.year);}
+    if(cTo){$('toMonth').value=cTo.month||'';setYearField('toYear','toYearOther',cTo.year);}
+    let artist=String(c.artist||c.artistRaw||'').trim();
+    if(!artist || artist.includes('Sin artista')){$('artistNone').checked=true;$('artistValue').value='';}
+    else{$('artistWrite').checked=true;$('artistValue').value=artist;}
+    clearStyleChoices();
+    const style=String(c.style||'').trim();
+    if(!artist || artist.includes('Sin artista')){
+      if(style.startsWith('🎯')){
+        $('styleCustomMode').checked=true;
+        const raw=style.replace(/^🎯\s*Solo:\s*/,'');
+        const wanted=raw.split(',').map(x=>x.trim()).filter(Boolean);
+        const unmatched=[];
+        wanted.forEach(w=>{
+          const cb=[...document.querySelectorAll('.styleCustomReveal .stylegrid input[type="checkbox"]')].find(x=>(x.closest('label')?.textContent||'').trim().toLowerCase()===w.toLowerCase());
+          if(cb) cb.checked=true; else unmatched.push(w);
+        });
+        $('styleCustomOther').value=unmatched.join(', ');
+      } else $('styleBase').checked=true;
+    }
+    currentConfig=c;
+    try{sessionStorage.setItem('bcplus_current',JSON.stringify(c));}catch(e){}
+  }
+  function hasDraft(){
+    return !!(val('fromMonth')||resolvedYear('fromYear','fromYearOther')||val('toMonth')||resolvedYear('toYear','toYearOther')||checked('emailUse')||checked('locGlobal')||checked('locCustom')||checked('artistWrite')||checked('styleCustomMode'));
+  }
+  function compactName(c){
+    const a=(c?.artist||c?.artistRaw||'').replace('🚫 Sin artista','').trim();
+    const loc=(c?.location||'').replace(/^🌍\s*/,'').replace(/^🌐\s*/,'');
+    const y=c?.from?.year||'';
+    return [a||'BC+',loc,y].filter(Boolean).join(' · ');
+  }
+  function saveCurrentSearch(){
+    if(!currentResult?.criteria && !currentConfig) return;
+    const c=currentResult?.criteria||currentConfig;
+    const arr=loadStore(storeKeys.searches);
+    arr.unshift({id:Date.now(),name:compactName(c),criteria:c,savedAt:new Date().toISOString()});
+    saveStore(storeKeys.searches,arr); renderStores();
+    $('saveSearchStatus').style.display='block';
+    setTimeout(()=>{$('saveSearchStatus').style.display='none'},2200);
+  }
+  function saveEntity(kind,index,btn){
+    if(!currentResult) return;
+    const src=kind==='concert'?currentResult.confirmed:currentResult.pending;
+    const item=src?.[index]; if(!item) return;
+    const key=kind==='concert'?storeKeys.concerts:storeKeys.alerts;
+    const arr=loadStore(key);
+    arr.unshift({...item,id:Date.now(),savedAt:new Date().toISOString(),criteria:currentResult.criteria||currentConfig});
+    saveStore(key,arr); renderStores();
+    btn.textContent=kind==='concert'?'✅ Concierto guardado':'✅ Alerta guardada'; btn.classList.add('saved'); btn.disabled=true;
+  }
+  function eventHasExactDate(v){return /(\d{1,2}\/\d{1,2}\/\d{4})/.test(String(v||''));}
+  function eventMonthYear(v){
+    const s=String(v||'');
+    let m=s.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+    if(m)return `${m[3]}-${String(Number(m[2])).padStart(2,'0')}`;
+    const my=extractMonthYear(s);
+    if(my)return `${my.year}-${String(monthNames.indexOf(my.month)+1).padStart(2,'0')}`;
+    return '';
+  }
+  function alertMatchesConfirmed(alert,event){
+    if(!alert||!event||!artistsCompatible(alert.artist,event.artist)) return false;
+    const av=alert.date||alert.period||alert.criteria?.period||'', ev=event.date||event.period||'';
+    const ad=dateCore(av), ed=dateCore(ev);
+    if(eventHasExactDate(av) && eventHasExactDate(ev) && ad!==ed) return false;
+    if(!(eventHasExactDate(av) && eventHasExactDate(ev))){
+      const am=eventMonthYear(av), em=eventMonthYear(ev);
+      if(am && em && am!==em) return false;
+    }
+    const ac=normalizeKeyPart(alert.city), ec=normalizeKeyPart(event.city);
+    if(ac && ec && ac!==ec) return false;
+    return true;
+  }
+  function findConvertibleAlerts(pkg){
+    const alerts=loadStore(storeKeys.alerts), confirmed=pkg?.confirmed||[], matches=[];
+    alerts.forEach((a,ai)=>{
+      const ci=confirmed.findIndex(ev=>alertMatchesConfirmed(a,ev));
+      if(ci>=0) matches.push({alertIndex:ai,alert:a,confirmedIndex:ci,event:confirmed[ci]});
+    });
+    return matches;
+  }
+  function renderAlertConversions(pkg){
+    const box=$('alertConversionArea'); if(!box) return;
+    const matches=findConvertibleAlerts(pkg);
+    if(!matches.length){box.innerHTML='';return;}
+    box.innerHTML=`<div class="conversionBox"><h4>🎉 Alerta confirmada</h4><div style="font-size:11px;color:#d7bd78;margin-bottom:5px">BC+ ha encontrado entre los confirmados un evento que antes estaba guardado como alerta.</div>${matches.map(m=>{
+      const a=m.alert,e=m.event,aid=String(a.id??m.alertIndex);
+      return `<div class="conversionItem"><div class="desc"><b>${esc(e.artist||a.artist||'Concierto')}</b><br>${esc(e.date||a.date||'')} · ${esc([e.city,e.venue].filter(Boolean).join(' · '))}</div><button class="tinyBtn" type="button" data-convert-alert="${esc(aid)}" data-confirmed-index="${m.confirmedIndex}">✅ Convertir en concierto guardado</button></div>`;
+    }).join('')}</div>`;
+    document.querySelectorAll('#alertConversionArea [data-convert-alert]').forEach(b=>b.onclick=()=>convertAlertToConcert(b.dataset.convertAlert,+b.dataset.confirmedIndex));
+  }
+  function convertAlertToConcert(alertId,confirmedIndex){
+    const event=currentResult?.confirmed?.[confirmedIndex]; if(!event) return;
+    const alerts=loadStore(storeKeys.alerts), concerts=loadStore(storeKeys.concerts);
+    const ai=alerts.findIndex((a,i)=>String(a.id??i)===String(alertId));
+    if(ai<0){alert('⚠️ La alerta ya no está disponible.');renderAlertConversions(currentResult);return;}
+    const oldAlert=alerts[ai];
+    const already=concerts.findIndex(c=>sameEvent(c,event));
+    if(already<0){
+      concerts.unshift({...oldAlert,...event,id:Date.now(),savedAt:new Date().toISOString(),criteria:currentResult.criteria||oldAlert.criteria||currentConfig,convertedFromAlert:true});
+      saveStore(storeKeys.concerts,concerts);
+    }
+    alerts.splice(ai,1); saveStore(storeKeys.alerts,alerts);
+    renderStores(); renderAlertConversions(currentResult);
+    alert(already>=0?'✅ La alerta se ha eliminado porque ese concierto ya estaba guardado.':'✅ Alerta convertida en concierto guardado.');
+  }
+
+  function renderResultPackage(pkg){
+    currentResult=pkg;
+    if(pkg.criteria) currentConfig=pkg.criteria;
+    $('resState').textContent=pkg.status||'Completado';
+    $('resConfirmed').textContent=(pkg.confirmed||[]).length;
+    $('resPending').textContent=(pkg.pending||[]).length;
+    $('resultText').textContent=pkg.resultText||'Resultado recibido.';
+    const ca=$('confirmedSaveArea'), pa=$('pendingSaveArea'); ca.innerHTML=''; pa.innerHTML='';
+    renderAlertConversions(pkg);
+    if((pkg.confirmed||[]).length){
+      ca.innerHTML='<h4 style="margin:16px 0 5px">⭐ Conciertos confirmados</h4><div class="entityList">'+pkg.confirmed.map((x,i)=>`<div class="entitySave"><div class="desc"><b>${esc(x.artist||'Artista')}</b><br>${esc(x.date||'Fecha')} · ${esc([x.city,x.venue].filter(Boolean).join(' · '))}</div><button class="tinyBtn" type="button" data-kind="concert" data-index="${i}">⭐ Guardar concierto</button></div>`).join('')+'</div>';
+    }
+    if((pkg.pending||[]).length){
+      pa.innerHTML='<h4 style="margin:16px 0 5px">⚠️ Señales pendientes</h4><div class="entityList">'+pkg.pending.map((x,i)=>`<div class="entitySave"><div class="desc"><b>${esc(x.artist||'Artista')}</b><br>${esc(x.date||x.period||'Pendiente')} · ${esc([x.city,x.venue].filter(Boolean).join(' · '))}</div><button class="tinyBtn" type="button" data-kind="alert" data-index="${i}">⚠️ Guardar alerta</button></div>`).join('')+'</div>';
+    }
+    document.querySelectorAll('#resultBox [data-kind]').forEach(b=>b.addEventListener('click',()=>saveEntity(b.dataset.kind,+b.dataset.index,b)));
+    $('amplitudeBox').style.display='none'; $('executionBox').style.display='none'; $('reviewBox').style.display='none'; $('resultBox').style.display='block';
+    $('resultBox').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function renderAmplitudeControl(pkg){
+    currentConfig=pkg.criteria||currentConfig;
+    $('amplitudeReason').textContent=pkg.reason||pkg.message||'Esta configuración puede producir una cantidad muy elevada de resultados.';
+    $('executionBox').style.display='none'; $('reviewBox').style.display='none'; $('resultBox').style.display='none';
+    $('amplitudeBox').style.display='block';
+    $('amplitudeBox').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  async function importBridgeFile(file){
+    try{
+      const pkg=JSON.parse(await file.text());
+      const validResult=pkg.format==='BCPLUS_RESULT';
+      const validControl=pkg.format==='BCPLUS_CONTROL' && (pkg.type==='amplitude_warning'||pkg.status==='amplitude_warning');
+      if(!validResult && !validControl) throw new Error('Formato no reconocido');
+      pendingBridgePackage=pkg;
+      $('bridgeReference').textContent=pkg.reference||deriveReference(pkg.criteria);
+      const type=validResult?'✅ Resultado terminado':'⚠️ Control de amplitud';
+      const counts=validResult?`<br>✅ ${(pkg.confirmed||[]).length} confirmados · ⚠️ ${(pkg.pending||[]).length} pendientes`:'';
+      $('bridgeMeta').innerHTML=`${type}${counts}<br>${criteriaMeta(pkg.criteria)}`;
+      $('bridgePreview').style.display='block';
+      $('bridgePreview').scrollIntoView({behavior:'smooth',block:'nearest'});
+    }catch(e){pendingBridgePackage=null;alert('⚠️ El archivo no es un retorno BC+ válido.');}
+  }
+  function confirmBridgeImport(){
+    const pkg=pendingBridgePackage; if(!pkg) return;
+    if(pkg.criteria) applyCriteriaToForm(pkg.criteria);
+    rememberImportedPackage(pkg);
+    $('bridgePreview').style.display='none'; if($('resultFile')) $('resultFile').value=''; pendingBridgePackage=null;
+    if(pkg.format==='BCPLUS_RESULT') renderResultPackage(pkg); else renderAmplitudeControl(pkg);
+  }
+  function cancelBridgeImport(){pendingBridgePackage=null;$('bridgePreview').style.display='none';if($('resultFile')) $('resultFile').value='';}
+  async function stageSearchImport(file){
+    try{
+      const pkg=JSON.parse(await file.text());
+      const validSearch=pkg.format==='BCPLUS' && !!pkg.criteria;
+      const validResult=pkg.format==='BCPLUS_RESULT' && !!pkg.criteria;
+      const validControl=pkg.format==='BCPLUS_CONTROL' && !!pkg.criteria && (pkg.type==='amplitude_warning'||pkg.status==='amplitude_warning');
+      if(!validSearch && !validResult && !validControl) throw new Error('Formato no reconocido');
+
+      pendingSearchPackage=pkg;
+      $('searchImportReference').textContent=pkg.reference||deriveReference(pkg.criteria);
+
+      if(validResult){
+        $('searchImportTitle').textContent='📦 Resultado preparado';
+        $('confirmSearchImport').textContent='✅ Importar resultado';
+        $('searchImportMeta').innerHTML=`✅ ${(pkg.confirmed||[]).length} confirmados · ⚠️ ${(pkg.pending||[]).length} pendientes<br>${criteriaMeta(pkg.criteria)}`;
+        $('searchImportWarning').textContent='Hasta pulsar “Importar resultado”, no se sustituirá la búsqueda actual ni se absorberá el resultado.';
+      }else if(validControl){
+        $('searchImportTitle').textContent='📦 Control de amplitud preparado';
+        $('confirmSearchImport').textContent='✅ Importar control';
+        $('searchImportMeta').innerHTML=`⚠️ ${esc(pkg.reason||pkg.message||'Búsqueda muy amplia')}<br>${criteriaMeta(pkg.criteria)}`;
+        $('searchImportWarning').textContent='Hasta pulsar “Importar control”, no se modificará la búsqueda que tengas en pantalla.';
+      }else{
+        $('searchImportTitle').textContent='📦 Búsqueda preparada';
+        $('confirmSearchImport').textContent='✅ Cargar búsqueda';
+        $('searchImportMeta').innerHTML=criteriaMeta(pkg.criteria);
+        $('searchImportWarning').textContent='Al confirmar se rellenarán los 5 criterios, pero BC+ no ejecutará la búsqueda automáticamente.';
+      }
+      $('searchImportPreview').style.display='block';
+      $('searchImportPreview').scrollIntoView({behavior:'smooth',block:'nearest'});
+    }catch(e){
+      pendingSearchPackage=null;
+      alert('⚠️ El archivo no es un archivo BC+ válido (.bcplus, .bcplusresult o .bcpluscontrol).');
+    }
+  }
+
+  function confirmSearchImport(){
+    const pkg=pendingSearchPackage;
+    if(!pkg) return;
+
+    if(hasDraft() && !confirm('⚠️ Tienes una búsqueda en preparación. Al importar este archivo se sustituirán los criterios actuales por los del archivo. ¿Quieres continuar?')) return;
+
+    if(pkg.criteria) applyCriteriaToForm(pkg.criteria);
+    rememberImportedPackage(pkg);
+
+    pendingSearchPackage=null;
+    $('searchImportPreview').style.display='none';
+    if($('searchImportFile')) $('searchImportFile').value='';
+    location.hash='searchView';
+
+    setTimeout(()=>{
+      if(pkg.format==='BCPLUS_RESULT'){
+        $('searchActionbar').style.display='none';
+        renderResultPackage(pkg);
+      }else if(pkg.format==='BCPLUS_CONTROL'){
+        $('searchActionbar').style.display='none';
+        renderAmplitudeControl(pkg);
+      }else{
+        currentResult=null;
+        $('reviewBox').style.display='none';
+        $('executionBox').style.display='none';
+        $('amplitudeBox').style.display='none';
+        $('resultBox').style.display='none';
+        $('searchActionbar').style.display='flex';
+        $('bcForm').scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    },40);
+  }
+
+  function cancelSearchImport(){
+    pendingSearchPackage=null;
+    $('searchImportPreview').style.display='none';
+    if($('searchImportFile')) $('searchImportFile').value='';
+  }
+  function useSavedSearch(idx){
+    if($('recheckLoaded')) $('recheckLoaded').style.display='none';
+    const it=loadStore(storeKeys.searches)[idx];if(!it?.criteria) return;
+    if(hasDraft() && !confirm('⚠️ Tienes una búsqueda en preparación. Al cargar esta referencia se sustituirán los datos actuales. ¿Quieres continuar?')) return;
+    applyCriteriaToForm(it.criteria);currentResult=null;
+    $('reviewBox').style.display='none';$('executionBox').style.display='none';$('amplitudeBox').style.display='none';$('resultBox').style.display='none';$('searchActionbar').style.display='flex';
+    location.hash='searchView';setTimeout(()=>$('bcForm').scrollIntoView({behavior:'smooth',block:'start'}),30);
+  }
+  function keepFullSearch(){
+    if(!currentConfig) return;
+    $('amplitudeBox').style.display='none';
+    $('searchActionbar').style.display='none';
+    $('executionBox').style.display='block';
+    $('handoffText').value=handoff(currentConfig,true);
+    $('executionBox').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function adjustSearch(){
+    $('amplitudeBox').style.display='none';
+    $('executionBox').style.display='none';
+    $('reviewBox').style.display='none';
+    $('searchActionbar').style.display='flex';
+    $('bcForm').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function exportSavedSearch(idx){
+    const it=loadStore(storeKeys.searches)[idx]; if(!it) return;
+    const payload={format:'BCPLUS',version:1,reference:it.name||deriveReference(it.criteria),criteria:it.criteria};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=(it.name||'BCPLUS_busqueda').replace(/[^a-z0-9_-]+/gi,'_')+'.bcplus'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  }
+  function deleteStored(key,idx){const arr=loadStore(key); arr.splice(idx,1); saveStore(key,arr); renderStores();}
+  function importSignature(pkg){
+    const ref=pkg.reference||deriveReference(pkg.criteria); const body=pkg.resultText||pkg.reason||'';
+    return [pkg.format||'',ref,JSON.stringify(pkg.criteria||{}),body].join('|');
+  }
+  function rememberImportedPackage(pkg){
+    if(!pkg) return;
+    const arr=loadStore(storeKeys.imports); const sig=importSignature(pkg);
+    const oldIndex=arr.findIndex(x=>x.signature===sig);
+    const item={id:Date.now()+Math.random(),reference:pkg.reference||deriveReference(pkg.criteria),format:pkg.format||'BCPLUS',signature:sig,importedAt:new Date().toISOString(),package:pkg};
+    if(oldIndex>=0) arr.splice(oldIndex,1);
+    arr.unshift(item);
+    saveStore(storeKeys.imports,arr); renderImports(); renderResultPicker();
+  }
+  function importedType(format){return format==='BCPLUS_RESULT'?'✅ Resultado':format==='BCPLUS_CONTROL'?'⚠️ Control':'🔎 Búsqueda';}
+  function renderImports(){
+    const box=$('importsList'); if(!box) return; const arr=loadStore(storeKeys.imports);
+    box.innerHTML=arr.length?arr.map((x,i)=>{const p=x.package||{}; const counts=p.format==='BCPLUS_RESULT'?` · ${(p.confirmed||[]).length} confirmados · ${(p.pending||[]).length} pendientes`:'';return `<div class="storedCard"><b>${esc(x.reference||deriveReference(p.criteria))}</b><div class="storedMeta">${importedType(p.format)}${counts}</div><div class="storedActions"><button class="tinyBtn" type="button" data-open-import="${i}">${p.format==='BCPLUS'?'▶️ Usar':'👁️ Abrir'}</button><button class="tinyBtn danger" type="button" data-delete-import="${i}">🗑️ Eliminar</button></div></div>`}).join(''):'<div class="empty">Todavía no hay archivos importados guardados en esta copia.</div>';
+    document.querySelectorAll('[data-open-import]').forEach(b=>b.onclick=()=>openImportedPackage(+b.dataset.openImport));
+    document.querySelectorAll('[data-delete-import]').forEach(b=>b.onclick=()=>{const a=loadStore(storeKeys.imports);a.splice(+b.dataset.deleteImport,1);saveStore(storeKeys.imports,a);renderImports();renderResultPicker();});
+  }
+  function openImportedPackage(idx){
+    if($('recheckLoaded')) $('recheckLoaded').style.display='none';
+    const item=loadStore(storeKeys.imports)[idx], pkg=item?.package; if(!pkg) return;
+    if(hasDraft() && !confirm('⚠️ Tienes una búsqueda en preparación. Al abrir este archivo se sustituirán los criterios actuales. ¿Quieres continuar?')) return;
+    if(pkg.criteria) applyCriteriaToForm(pkg.criteria); location.hash='searchView';
+    setTimeout(()=>{
+      if(pkg.format==='BCPLUS_RESULT'){ $('searchActionbar').style.display='none';renderResultPackage(pkg); }
+      else if(pkg.format==='BCPLUS_CONTROL'){ $('searchActionbar').style.display='none';renderAmplitudeControl(pkg); }
+      else{currentResult=null;$('reviewBox').style.display='none';$('executionBox').style.display='none';$('amplitudeBox').style.display='none';$('resultBox').style.display='none';$('searchActionbar').style.display='flex';$('bcForm').scrollIntoView({behavior:'smooth',block:'start'});}
+    },40);
+  }
+  function getImportedResultPackages(){
+    return loadStore(storeKeys.imports).map((x,i)=>({storeIndex:i,item:x,pkg:x?.package})).filter(x=>x.pkg?.format==='BCPLUS_RESULT');
+  }
+  function renderResultPicker(){
+    const box=$('resultPickList'); if(!box) return;
+    const results=getImportedResultPackages();
+    box.innerHTML=results.length?results.map(x=>{
+      const p=x.pkg, ref=x.item.reference||p.reference||deriveReference(p.criteria);
+      return `<label class="resultPick"><input type="checkbox" class="resultSelect" data-import-index="${x.storeIndex}"><span><b>${esc(ref)}</b><small>${(p.confirmed||[]).length} confirmados · ${(p.pending||[]).length} pendientes</small></span><span class="resultBadge">.bcplusresult</span></label>`;
+    }).join(''):'<div class="empty">Importa al menos un archivo .bcplusresult para poder consolidar.</div>';
+    currentConsolidated=null; if($('consolidatedBox')) $('consolidatedBox').style.display='none';
+  }
+  function normalizeKeyPart(v){return String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();}
+  function dateCore(v){const s=String(v||'');const m=s.match(/(\d{1,2}\/\d{1,2}\/\d{4})/);return m?m[1]:normalizeKeyPart(s);}
+  function artistsCompatible(a,b){a=normalizeKeyPart(a);b=normalizeKeyPart(b);if(!a||!b)return false;if(a===b)return true;const short=a.length<=b.length?a:b,long=a.length<=b.length?b:a;return short.length>=5&&long.includes(short);}
+  function sameEvent(a,b){return dateCore(a.date||a.period)===dateCore(b.date||b.period)&&normalizeKeyPart(a.venue)===normalizeKeyPart(b.venue)&&artistsCompatible(a.artist,b.artist);}
+  function mergeMissing(base,extra){
+    const out={...base};
+    ['artist','date','period','city','venue','status','official','fan_to_fan','resale','style','spotify','maps','price','notes'].forEach(k=>{if((!out[k]||out[k]==='No comprobada'||out[k]==='No comprobado')&&extra[k])out[k]=extra[k];});
+    return out;
+  }
+  function dateSortValue(v){
+    const s=String(v||''); const m=s.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+    if(m)return Number(m[3])*10000+Number(m[2])*100+Number(m[1]);
+    const monthsMap={enero:1,febrero:2,marzo:3,abril:4,mayo:5,junio:6,julio:7,agosto:8,septiembre:9,octubre:10,noviembre:11,diciembre:12};
+    const mm=s.toLowerCase().match(/(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\s+(\d{4})/);
+    return mm?Number(mm[2])*10000+monthsMap[mm[1]]*100+99:99999999;
+  }
+  function consolidateSelectedResults(){
+    const selected=[...document.querySelectorAll('.resultSelect:checked')].map(x=>+x.dataset.importIndex);
+    if(!selected.length){alert('📚 Selecciona al menos una búsqueda de resultados.');return;}
+    const includePending=!!$('includePendingResults')?.checked;
+    const imports=loadStore(storeKeys.imports); const merged=[]; let raw=0; const sources=[];
+    selected.forEach(idx=>{
+      const wrap=imports[idx], p=wrap?.package; if(p?.format!=='BCPLUS_RESULT') return;
+      const origin=wrap.reference||p.reference||deriveReference(p.criteria); sources.push(origin);
+      const batches=[['Confirmado',p.confirmed||[]]]; if(includePending)batches.push(['Pendiente',p.pending||[]]);
+      batches.forEach(([type,items])=>items.forEach(item=>{
+        raw++; const pos=merged.findIndex(x=>sameEvent(x,item)); const existing=pos>=0?merged[pos]:null;
+        if(!existing){merged.push({...item,_type:type,_origins:[origin]});return;}
+        if(!existing._origins.includes(origin))existing._origins.push(origin);
+        if(existing._type==='Pendiente'&&type==='Confirmado'){
+          const origins=existing._origins.slice(); const upgraded=mergeMissing(item,existing); upgraded._type='Confirmado'; upgraded._origins=origins; merged[pos]=upgraded;
+        }else merged[pos]={...mergeMissing(existing,item),_type:existing._type,_origins:existing._origins};
+      }));
+    });
+    const rows=merged.sort((a,b)=>dateSortValue(a.date||a.period)-dateSortValue(b.date||b.period)||String(a.artist||'').localeCompare(String(b.artist||''),'es'));
+    currentConsolidated={sources,raw,duplicates:raw-rows.length,rows,includePending,createdAt:new Date().toISOString()};
+    $('conSourcesCount').textContent=sources.length; $('conRawCount').textContent=raw; $('conDupCount').textContent=raw-rows.length; $('conFinalCount').textContent=rows.length;
+    $('consolidatedSources').textContent='Incluye: '+sources.join(' · ');
+    $('consolidatedRows').innerHTML=rows.map(r=>`<tr><td>${esc(r.date||r.period||'—')}</td><td><b>${esc(r.artist||'—')}</b></td><td>${esc([r.city,r.venue].filter(Boolean).join(' · ')||'—')}</td><td>${r._type==='Confirmado'?'✅ Confirmado':'⚠️ Pendiente'}</td><td>${esc(r.style||'—')}</td><td>${esc(r._origins.join(' / '))}</td></tr>`).join('');
+    $('consolidatedBox').style.display='block'; $('consolidatedBox').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function csvCell(v){const s=String(v??'').replace(/"/g,'""');return '"'+s+'"';}
+  function safeDownloadName(s){return String(s||'BCPLUS_consolidado').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9_-]+/gi,'_').replace(/^_+|_+$/g,'');}
+  function downloadBlob(content,type,name){const blob=new Blob([content],{type});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+  function exportConsolidatedCsv(){
+    if(!currentConsolidated){alert('Primero pulsa 🧩 Consolidar seleccionadas.');return;}
+    const headers=['Fecha','Artista','Ciudad','Recinto','Tipo','Estado','Estilo / interés','Oficial','Spotify','Maps','Fan-to-Fan','Reventa','Precio','Notas','Búsqueda origen'];
+    const data=currentConsolidated.rows.map(r=>[r.date||r.period||'',r.artist||'',r.city||'',r.venue||'',r._type,r.status||'',r.style||'',r.official||'',r.spotify||'',r.maps||'',r.fan_to_fan||'',r.resale||'',r.price||'',r.notes||'',r._origins.join(' / ')]);
+    const csv='\ufeff'+[headers,...data].map(row=>row.map(csvCell).join(';')).join('\r\n');
+    downloadBlob(csv,'text/csv;charset=utf-8','BCPLUS_Consolidado_'+new Date().toISOString().slice(0,10)+'.csv');
+  }
+  function buildConsolidatedHtml(forPrint=false){
+    if(!currentConsolidated)return '';
+    const rows=currentConsolidated.rows.map(r=>`<tr><td>${esc(r.date||r.period||'')}</td><td><b>${esc(r.artist||'')}</b></td><td>${esc(r.city||'')}</td><td>${esc(r.venue||'')}</td><td>${r._type==='Confirmado'?'✅ Confirmado':'⚠️ Pendiente'}</td><td>${esc(r.status||'')}</td><td>${esc(r.style||'')}</td><td>${r.official?`<a href="${esc(r.official)}">Oficial</a>`:''}</td><td>${r.spotify?`<a href="${esc(r.spotify)}">Spotify</a>`:''}</td><td>${esc(r._origins.join(' / '))}</td></tr>`).join('');
+    const printCss=forPrint?'@page{size:A4 landscape;margin:9mm}':'';
+    return `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>BC+ Consolidado</title><style>${printCss}body{font-family:Arial,sans-serif;margin:28px;color:#17202a}h1{margin-bottom:4px}p{color:#52606d}table{border-collapse:collapse;width:100%;font-size:10px}th,td{border:1px solid #ccd3d8;padding:6px;text-align:left;vertical-align:top;word-break:break-word}th{background:#17202a;color:white}tr:nth-child(even){background:#f4f6f7}@media print{body{margin:0}a{color:black;text-decoration:none}thead{display:table-header-group}tr{break-inside:avoid}}</style></head><body><h1>BC+ · Resultados consolidados</h1><p><b>${currentConsolidated.sources.length}</b> búsquedas · <b>${currentConsolidated.rows.length}</b> registros finales · <b>${currentConsolidated.duplicates}</b> duplicados eliminados.</p><p>Fuentes internas: ${esc(currentConsolidated.sources.join(' · '))}</p><table><thead><tr><th>Fecha</th><th>Artista</th><th>Ciudad</th><th>Recinto</th><th>Tipo</th><th>Estado</th><th>Estilo / interés</th><th>Oficial</th><th>Spotify</th><th>Origen</th></tr></thead><tbody>${rows}</tbody></table><p>Documento generado localmente por BC+. No se ha repetido ninguna búsqueda.</p></body></html>`;
+  }
+  function exportConsolidatedHtml(){
+    if(!currentConsolidated){alert('Primero pulsa 🧩 Consolidar seleccionadas.');return;}
+    downloadBlob(buildConsolidatedHtml(false),'text/html;charset=utf-8','BCPLUS_Consolidado_'+new Date().toISOString().slice(0,10)+'.html');
+  }
+  function exportConsolidatedPdf(){
+    if(!currentConsolidated){alert('Primero pulsa 🧩 Consolidar seleccionadas.');return;}
+    const w=window.open('','_blank');
+    if(!w){alert('El navegador ha bloqueado la ventana de PDF. Permite ventanas emergentes para este archivo BC+ y vuelve a pulsar 📕 PDF.');return;}
+    w.document.open();
+    w.document.write(buildConsolidatedHtml(true));
+    w.document.close();
+    w.focus();
+    setTimeout(()=>{try{w.print();}catch(e){alert('No se pudo abrir el diálogo de impresión. Usa Imprimir en la nueva pestaña y elige Guardar como PDF.');}},250);
+  }
+  function startNewSearch(){
+    if($('recheckLoaded')) $('recheckLoaded').style.display='none';
+    if($('alertConversionArea')) $('alertConversionArea').innerHTML='';
+    $('emailNone').checked=true; refreshEmailDropdown(getDefaultEmail()||'CUSTOM'); if($('emailValue')) $('emailValue').value=''; updateEmailMode();
+    $('locNone').checked=true; $('locationValue').value='';
+    $('fromMonth').value=''; $('toMonth').value=''; setYearField('fromYear','fromYearOther',''); setYearField('toYear','toYearOther','');
+    $('artistNone').checked=true; $('artistValue').value=''; clearStyleChoices(); $('styleBase').checked=true;
+    currentConfig=null; currentResult=null; pendingBridgePackage=null; pendingSearchPackage=null;
+    $('reviewBox').style.display='none'; $('executionBox').style.display='none'; $('amplitudeBox').style.display='none'; $('resultBox').style.display='none'; $('searchActionbar').style.display='flex';
+    try{sessionStorage.removeItem('bcplus_current')}catch(e){}
+    location.hash='searchView'; setTimeout(()=>$('bcForm').scrollIntoView({behavior:'smooth',block:'start'}),20);
+  }
+  function recheckStoredEntity(kind,idx){
+    const key=kind==='concert'?storeKeys.concerts:storeKeys.alerts;
+    const item=loadStore(key)[idx];
+    if(!item){alert('⚠️ No se encuentra esta referencia guardada.');return;}
+    const c=criteriaForStoredEntity(item);
+    if(!c.from || !c.to){
+      alert('⚠️ Esta referencia no conserva un periodo suficiente para volver a comprobarla. Ábrela y completa el periodo manualmente.');
+    }
+    if(hasDraft() && !confirm('⚠️ Tienes una búsqueda en preparación. ¿Quieres sustituirla por los criterios de esta referencia?')) return;
+    applyCriteriaToForm(c);
+    currentResult=null;
+    $('reviewBox').style.display='none';
+    $('executionBox').style.display='none';
+    $('amplitudeBox').style.display='none';
+    $('resultBox').style.display='none';
+    $('searchActionbar').style.display='flex';
+    if($('recheckLoaded')){
+      $('recheckLoadedMeta').innerHTML=criteriaMeta(c);
+      $('recheckLoaded').style.display='block';
+    }
+    location.hash='searchView';
+    setTimeout(()=>$('bcForm').scrollIntoView({behavior:'smooth',block:'start'}),40);
+  }
+
+  function localDateStamp(){
+    const d=new Date(), p=n=>String(n).padStart(2,'0');
+    return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
+  }
+
+  function exportFullBackup(){
+    const payload={
+      format:'BCPLUS_BACKUP',
+      version:1,
+      reference:`Copia de seguridad BC+ · ${localDateStamp()}`,
+      createdAt:new Date().toISOString(),
+      data:{
+        searches:loadStore(storeKeys.searches),
+        concerts:loadStore(storeKeys.concerts),
+        alerts:loadStore(storeKeys.alerts),
+        imports:loadStore(storeKeys.imports),
+        emails:getRememberedEmails(),
+        defaultEmail:getDefaultEmail()||''
+      }
+    };
+    downloadBlob(JSON.stringify(payload,null,2),'application/json;charset=utf-8',`BCPLUS_Copia_seguridad_${localDateStamp()}.bcplusbackup`);
+  }
+
+  async function restoreFullBackup(file){
+    try{
+      const pkg=JSON.parse(await file.text());
+      if(pkg?.format!=='BCPLUS_BACKUP' || !pkg.data || typeof pkg.data!=='object') throw new Error('Formato no reconocido');
+      const d=pkg.data;
+      const searches=Array.isArray(d.searches)?d.searches:[];
+      const concerts=Array.isArray(d.concerts)?d.concerts:[];
+      const alerts=Array.isArray(d.alerts)?d.alerts:[];
+      const imports=Array.isArray(d.imports)?d.imports:[];
+      const emails=Array.isArray(d.emails)?d.emails.filter(Boolean):[];
+      const def=typeof d.defaultEmail==='string'?d.defaultEmail:'';
+      const summary=`📂 ${searches.length} búsquedas\n⭐ ${concerts.length} conciertos\n⚠️ ${alerts.length} alertas\n📦 ${imports.length} archivos importados\n📧 ${emails.length} correos recordados`;
+      if(!confirm(`🛟 Restaurar copia BC+\n\n${summary}\n\nEsto sustituirá los datos locales actuales de esta copia. ¿Continuar?`)) return;
+      saveStore(storeKeys.searches,searches);
+      saveStore(storeKeys.concerts,concerts);
+      saveStore(storeKeys.alerts,alerts);
+      saveStore(storeKeys.imports,imports);
+      saveStore(storeKeys.emails,[...new Set(emails)]);
+      try{
+        if(def)localStorage.setItem(storeKeys.defaultEmail,def);
+        else localStorage.removeItem(storeKeys.defaultEmail);
+        sessionStorage.removeItem('bcplus_current');
+      }catch(e){}
+      currentConfig=null; currentResult=null; pendingBridgePackage=null; pendingSearchPackage=null; currentConsolidated=null;
+      renderStores();renderImports();renderResultPicker();renderEmailPreferences();
+      $('emailNone').checked=true;refreshEmailDropdown(getDefaultEmail()||'CUSTOM');updateEmailMode();
+      alert('✅ Copia de seguridad BC+ restaurada correctamente.');
+    }catch(e){
+      alert('⚠️ El archivo no es una copia de seguridad BC+ válida.');
+    }finally{
+      if($('restoreBackupFile')) $('restoreBackupFile').value='';
+    }
+  }
+
+  function resetLocalData(){
+    if(!confirm('🧹 ¿Eliminar de esta copia todas las búsquedas, alertas, conciertos, archivos importados y correos recordados?')) return;
+    try{Object.values(storeKeys).forEach(k=>localStorage.removeItem(k));sessionStorage.removeItem('bcplus_current');}catch(e){}
+    renderStores();renderImports();renderResultPicker();renderEmailPreferences();$('emailNone').checked=true;refreshEmailDropdown(getDefaultEmail()||'CUSTOM');updateEmailMode();
+    alert('✅ Datos locales restablecidos. El Prompt Maestro BC+ no se ha modificado.');
+  }
+
+  function renderStores(){
+    const ss=loadStore(storeKeys.searches), cc=loadStore(storeKeys.concerts), aa=loadStore(storeKeys.alerts);
+    $('savedList').innerHTML=ss.length?ss.map((x,i)=>`<div class="storedCard" id="savedCard${i}"><b>${esc(x.name||deriveReference(x.criteria))}</b><div class="storedMeta">${esc(x.criteria?.period||'')}<br>${esc(x.criteria?.artist||x.criteria?.artistRaw||x.criteria?.style||'')} · ${esc(x.criteria?.location||'')}</div><div class="storedActions"><button class="tinyBtn" data-use-search="${i}">▶️ Usar</button><button class="tinyBtn" data-detail-search="${i}">👁️ Detalles</button><button class="tinyBtn" data-export-search="${i}">📤 Exportar</button><button class="tinyBtn danger" data-del-search="${i}">🗑️ Eliminar</button></div><div class="storedDetails">${criteriaMeta(x.criteria)}</div></div>`).join(''):'<div class="empty">Todavía no hay búsquedas guardadas en este dispositivo.</div>';
+    $('concertsList').innerHTML=cc.length?cc.map((x,i)=>`<div class="storedCard"><b>${esc(x.artist||'Concierto')}</b><div class="storedMeta">${esc(x.date||'')} · ${esc([x.city,x.venue].filter(Boolean).join(' · '))}</div><div class="storedActions"><button class="tinyBtn" data-recheck-concert="${i}">🔎 Comprobar ahora</button><button class="tinyBtn danger" data-del-concert="${i}">🗑️ Eliminar</button></div></div>`).join(''):'<div class="empty">No hay conciertos guardados.</div>';
+    $('alertsList').innerHTML=aa.length?aa.map((x,i)=>`<div class="storedCard"><b>${esc(x.artist||'Alerta')}</b><div class="storedMeta">${esc(x.date||x.period||'Pendiente')} · ${esc([x.city,x.venue].filter(Boolean).join(' · '))}</div><div class="storedActions"><button class="tinyBtn" data-recheck-alert="${i}">🔎 Comprobar ahora</button><button class="tinyBtn danger" data-del-alert="${i}">🗑️ Eliminar</button></div></div>`).join(''):'<div class="empty">No hay alertas guardadas.</div>';
+    document.querySelectorAll('[data-use-search]').forEach(b=>b.onclick=()=>useSavedSearch(+b.dataset.useSearch));
+    document.querySelectorAll('[data-detail-search]').forEach(b=>b.onclick=()=>{$('savedCard'+b.dataset.detailSearch)?.classList.toggle('showDetails')});
+    document.querySelectorAll('[data-export-search]').forEach(b=>b.onclick=()=>exportSavedSearch(+b.dataset.exportSearch));
+    document.querySelectorAll('[data-del-search]').forEach(b=>b.onclick=()=>deleteStored(storeKeys.searches,+b.dataset.delSearch));
+    document.querySelectorAll('[data-recheck-concert]').forEach(b=>b.onclick=()=>recheckStoredEntity('concert',+b.dataset.recheckConcert));
+    document.querySelectorAll('[data-recheck-alert]').forEach(b=>b.onclick=()=>recheckStoredEntity('alert',+b.dataset.recheckAlert));
+    document.querySelectorAll('[data-del-concert]').forEach(b=>b.onclick=()=>deleteStored(storeKeys.concerts,+b.dataset.delConcert));
+    document.querySelectorAll('[data-del-alert]').forEach(b=>b.onclick=()=>deleteStored(storeKeys.alerts,+b.dataset.delAlert));
+  }
+
+  $('selectAllResults')?.addEventListener('click',()=>document.querySelectorAll('.resultSelect').forEach(x=>x.checked=true));
+  $('clearResultSelection')?.addEventListener('click',()=>document.querySelectorAll('.resultSelect').forEach(x=>x.checked=false));
+  $('consolidateBtn')?.addEventListener('click',consolidateSelectedResults);
+  $('exportConCsv')?.addEventListener('click',exportConsolidatedCsv);
+  $('exportConHtml')?.addEventListener('click',exportConsolidatedHtml);
+  $('exportConPdf')?.addEventListener('click',exportConsolidatedPdf);
+  $('reviewBtn')?.addEventListener('click',showReview);
+  $('correctBtn')?.addEventListener('click',correct);
+  $('executeBtn')?.addEventListener('click',execute);
+  $('backFromExecution')?.addEventListener('click',correct);
+  $('copyHandoff')?.addEventListener('click',copy);
+  $('exportCurrent')?.addEventListener('click',exportConfig);
+  $('resultFile')?.addEventListener('change',e=>{const f=e.target.files?.[0]; if(f) importBridgeFile(f);});
+  $('confirmBridgeImport')?.addEventListener('click',confirmBridgeImport);
+  $('cancelBridgeImport')?.addEventListener('click',cancelBridgeImport);
+  $('searchImportFile')?.addEventListener('change',e=>{const f=e.target.files?.[0]; if(f) stageSearchImport(f);});
+  $('confirmSearchImport')?.addEventListener('click',confirmSearchImport);
+  $('cancelSearchImport')?.addEventListener('click',cancelSearchImport);
+  $('fromYear')?.addEventListener('change',()=>toggleOtherYear('fromYear','fromYearOther'));
+  $('toYear')?.addEventListener('change',()=>toggleOtherYear('toYear','toYearOther'));
+  $('keepFullBtn')?.addEventListener('click',keepFullSearch);
+  $('adjustSearchBtn')?.addEventListener('click',adjustSearch);
+  $('saveSearchBtn')?.addEventListener('click',saveCurrentSearch);
+  $('newSearchLink')?.addEventListener('click',startNewSearch);
+  $('emailChoice')?.addEventListener('change',updateEmailCustom);
+  $('emailNone')?.addEventListener('change',updateEmailMode);
+  $('emailUse')?.addEventListener('change',updateEmailMode);
+  $('prefEmailAdd')?.addEventListener('click',addRememberedEmail);
+  $('prefEmailInput')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addRememberedEmail();}});
+  $('exportBackup')?.addEventListener('click',exportFullBackup);
+  $('restoreBackupFile')?.addEventListener('change',e=>{const f=e.target.files?.[0];if(f)restoreFullBackup(f);});
+  $('resetLocalData')?.addEventListener('click',resetLocalData);
+  $('closeResultBtn')?.addEventListener('click',()=>{ $('resultBox').style.display='none'; $('searchActionbar').style.display='flex'; $('bcForm').scrollIntoView({behavior:'smooth',block:'start'});});
+  renderStores();
+  renderImports();
+  renderResultPicker();
+  renderEmailPreferences();
+  $('emailNone').checked=true;
+  refreshEmailDropdown(getDefaultEmail()||'CUSTOM');
+  updateEmailMode();
+})();
+</script>
+
+</body>
+</html>
